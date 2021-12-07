@@ -1,0 +1,93 @@
+1) Activate features in f11 menu.
+          inventory features--Maintain multiple godowns to yes, Enable job order processing to yes, use materail in and out to yes.
+1) Voucher set up for job work in order.
+      step-1 : create a new voucher type as Material In (Raw materials).
+                      GOT-> Accounts info-> voucher types-> create.
+                     i)  name--Material In (Raw materials)
+                    ii) type of voucher--material in
+                   iii) method of numbering--Automatic
+                   iv) use for job work --- yes.
+                    v) use for job work in --- yes.
+                   vi) allow consumptions---no.
+      step-2 : create a new voucher type  as Materials out (Finished goods).
+                      GOT-> Accounts info-> voucher types-> create.
+                     i)  name--Material out (Finished goods)
+                    ii) type of voucher--material out
+                   iii) method of numbering--Automatic
+                   iv) use for job work --- yes.
+                    v) use for job work in --- yes.
+2) Job work in order processing.
+      objectives--->
+                                  i) create all raw materials and finished goods in inventory with it's BOM given.
+                                 ii) record the entry for reciept of job in order from the principle company.
+                                 ii) record the entry for recieving the raw materials from the principle company.
+                                 ii) manufacture the finished product using the raw materials.
+                                 ii) record the entry for dispatching the finished goods after the completion of the job process.
+                                iii) entry to book the job work charges against the principle company.
+                                 ii) recieve the job work charges amount from the principle company.
+
+Question -- Pride industries has recieved a Job work in order for manufacturing pressure cookers from sunshine industries. The raw
+                       materials for manufacturing the pressure cookers are recieved by pride industries Ltd.  sunshine industries.
+3) Creation of ledgers.
+      i) Party ledger---> i) name - Sunshine industries.
+                                          ii) under - sundry debtors.
+                                         iii) maintain bill-by-bill - yes.
+      ii) job work incomes --> i) name - job work incomes.
+                                                      ii) under - indirect expenses.                                       
+4) Creation of godowns.
+                                           i) name - Sunshine godown.
+                                          ii) under - primary.
+                                         iii) allow storage for materials - yes.                    ????
+                                         iv) our stock with third party - no.
+                                          v) third party stock with us - yes.
+5) Create Raw materials and finished goods (pressure cooker) and also define it's BOM.
+6) Recording job work in order voucher.
+           open job work in order voucher and pass the following entry.
+                                          i) Party a/c name - Sunshine industries. enter additional details if needed and accept.
+                                         ii) in order field enter order number.
+                                        iii) select pressure cooker and press enter to enter stock item allocation screen.
+                                        iv) set track component to yes.
+                                         v) Due on field - takes the date on which the delivery of the finished goods is due ( in our case pride industries has
+                                                                          accepted manufacturing duration as 15 days hence the due date will be 15.4.2020 ).
+                                       vi) godown - Sunshine godown ( where the finished goods will be stored ).
+                                      vii) enter quantity.
+                                     viii) the component allocation screen will be filled automaticaly according to BOM of pressure cooker if it's set already.
+                                        ix) Type of component - pending to recieve ( as component are not yet recieved from the Sunshine industries ).
+                                         x) godown - Sunshine industries godown ( where the recieved raw materials will be stored ). accept.
+                                        xi) enter rate of item.
+7) job work in reports == GOT--> display--> job work in reports--> order outstanding--> orders.
+8) Entry for Materials In from principle company (Sunshine industries).
+            i) open Materials in (Raw Materials) voucher and pass the following entry (ctrl+w).
+                                          i) Party a/c name - Sunshine industries. press enter to see order details screen, select order number created previously.
+                                         ii) source godown - not applicable ( as components are being recieved from principle company ).
+                                        iii) name of items - items will be autofilled according to order selected. accept and save.
+9) Materials in report == GOT--> stock summary--> ctrl+G : godown type--> select third party stock with us and press enter on components.
+10) Manufacturing of finished goods.
+            i) Create a new voucher as manufacturing journal in voucher types.
+           ii) open manufacturing journal voucher and pass the entry for manufacturing pressure cookers.
+                                         i) name - pressure cooker.
+                                        ii) godown - sunshine industries  godown.
+                                       iii) the consumptions column will be filled automatically according to BOM.
+                                       iv) change the godown of components to Sunshine godown if it's not already set.  
+11) Dispatching finished goods (Materials out (Finished goods) voucher) to principle company ( Sunshine industries ).
+           i) open Materials out (finished goods) voucher and pass the following entry.
+                                         i) party a/c name - Sunshine industries. press enter to see order details scree and select order number created previously.
+                                        ii) order type - materials dispatch order. accept and save.
+                                       iii) destination godown - not applicable.
+                                       iv) under stock item - pressure cooker will be autofilled base of job order selected.
+                                        v) consider as scrap - no.
+                                       vi) All the fields will be autofilled in item allocation screen, just confirm the correctness and accept.
+12) Booking of Job work charges.
+           i) open sales voucher and pass the following entry.
+                                         i) turn on acconting invoice mode (alt+i).
+                                        ii) party a/c name - Sunshine industries.
+                                       iii) in particulars section select job work incomes ledger and fill the amount.
+                                       iv) type of ref - new ref. accept and save.
+13) Recieve amount from principal company ( Sunshine industries ).
+           i) open reciept voucher and pass the following entry.
+                                         i) use single entry mode.
+                                        ii) select Bank ledger.
+                                       iii) select manufacturer ledger (Sunshine industries).
+                                       iv) in bill wise details select Agst Ref --> select the correct bill and save.
+
+**********************************************JOB WORK IN ORDER ENDS HERE*******************************************************

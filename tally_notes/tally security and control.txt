@@ -1,0 +1,5 @@
+tally erp 9 comes with different access modes of accounts which we can use to set different passwords and usernames to give
+different level of access to the company accounts. to use it press alt+f3 and go to security control --- users and passwords. now we can
+set different usernames and passwords for different level of access. configure, save and now close company and and then open it with
+the new username and password that you saved just few moments ago. you will have restricted controls to the company according to 
+your settings.

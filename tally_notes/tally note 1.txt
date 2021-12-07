@@ -1,0 +1,6 @@
+enable security control and set name and password- allow open in tally
+gateway of tally inventory info.
+
+mail and enquiry
+
+display quit

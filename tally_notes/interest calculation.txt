@@ -1,0 +1,13 @@
+*what to activate for interest calculation -:
+  i) Activate interest calculation feature in f11--f1 menu.
+ ii) Activate Credit note and Debit note in f11--f1 menu.
+iii) Make sure "maintan bill-by-bill balance" is activated for the creditor and debtor.
+iv) Open vouchers of Credit, Debit notes and add  a classes named "interest calculation" in it. turn on option interest calculation in these calsses.  
+*Set interest rates and parameters on the Creditor or Debtor's ledger on which interest is to be calculated.
+    i) Open ledger and turn on maintain bill by bill balance and interest calculation. this opens new window.
+   ii) In this window set advance parameters such as Rate, period and due date for applicability of interest.
+
+Transaction Example-
+make a purchase then go to credit note and set date 1 month ahead of purchase date, enter the creditor ledger which will show calculated interest
+on this credtor till this date. Create new ledger of interest paid and complete the entry.
+  

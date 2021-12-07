@@ -1,0 +1,97 @@
+1) activate features in f11 menu.
+          inventory features--Maintain multiple godowns to yes, Enable job order processing to yes, use materail in and out to yes.
+2) alter vouchers material in, material out.
+          i) Material in-
+                     use for job work - yes.
+                     use for work in - no.
+                     allow consumption - yes.
+          ii) Material out-
+                     use for job work - yes.
+                     use for work in - no.
+3)create new voucher types Material in(raw materials), Material out(finished goods).
+           i) Material in(raw materials)
+                      under group - material in.
+                      use for job work - yes.
+                      use for work in - yes.
+                      allow consumption - no. 
+           ii) Material out(finished goods)
+                      under group - material out.
+                      use for job work - yes.
+                      use for work in - yes.
+Note --- Job work out order - giving order to job workers (third party companies).
+Note --- Job work in order - taking orders from other companies (clients/pricipal) as a job worker. 
+
+********************** Job work out order processing ************************************************
+Scenario - Pride industries has placed a job work out order for manufacturing pressure cookers to madan manufacturing co.
+                    the raw materials are to be purchase by Pride industries and are transferrred to Madan manufacturing co.
+
+4) Creating Ledgers - 
+             i) Madan manufacturing co. -->  under - sundry creditor,  maintain  bill by bill ->yes,  leave other fields  to blank or set no.
+            ii) ICIC bank -- to make payements.
+           iii) Job work charges  (indirect expenses) -- Ledger to track the expence on all the completed/ongoing job works under our company.
+5) Creating inventory masters.
+             i) Godown creation - 
+                       a) Component godown -->  under - primary,  our stock with third party - no,  third party stock with us - no.
+                       a) Finished goods godown -->  under - primary,  our stock with third party - no,  third party stock with us - no.
+                       a) job worker godown (madan manufacturing co.) -->  under - primary,  our stock with third party - yes,  third party stock with us - no.
+6) Create stock groups - 
+             i) Finished goods -- under - primary,  Should quantities be added -> yes.
+            ii) Components -- under - primary,  Should quantities be added -> yes.
+7) Create required unit of measures by usual method.
+8) Create raw material items under Components stock group using normal process.
+9) Create finished goods (pressure cooker) under finished goods stock group and also update it's BOM using raw materials from componets godown by normal process.
+
+At this stage we're ready to pass transactional entries for the job work process.
+
+10) Purchase raw materials from Global corporation(sundry creditor) and store it in Components godown.
+              Note - before passing purchase entry configure the following in f12 menu.            ------------------? 
+                           i) Use common ledger account for item allocation -> yes.
+                          ii) Use default for bill allocations -> no.
+11) Pass job work out order entry in job work out order voucher -- Giving order of manufacturing 100 cookers to madan manufacturing co.
+                            i) Party a/c names - Madan manufacturing co.
+                           ii) in party details screen - Duration of process - 15 Days (means job worker will in finish the order and dispatch the finished goods in 15 Days).
+                          iii) fill other fields if required, otherwise leave blank.
+                          iv) in items field select Pressure cooker (since we are giving order for pressure cookers not raw materials).
+                           v) in stock item allocations screen -- set track components -> yes
+                          vi) in godowns field select Finished goods godown where the recieved finished goods will be stored.
+                         vii) enter quantity and rate (eg. 100nos, 1000/nos).
+                        viii) component allocation screen will be filled automaticaly if BOM is defined  otherwise need to be filled manually.
+                          ix) type of component will be "Pending to issue" (because items is yet to be manufactured and delivered/issued by the job worker.
+                           x) pass and save the entry.
+**To see report --> GOT -> Display -> job work out reports -> order outstandings -> orders.
+12) Entry for issue/transfer of raw materials to job worker (madan manufacturing co.).
+                            i) Material out voucher -- reference->MO 1,  party name->  Madan manufacturing co.
+                           ii) in party details screen select existing order no. 1/MMC as order number and accept.
+                          iii) Destination godown -> job worker godown (Madan manufacturing co) where the sent raw materials will be stored.
+                          iv) List of raw materials will be filled up automatically.
+                           v) Accept and save.
+             Note - once the entry is done, go to GOT - D - job work out reports - order outstandings - components. you can observe that the report is blank because raw materials are
+                          supplied to the job worker. To see the cleared job order configure F12 and set show cleared job orders to yes.
+             Note - too see the above missing stock, check job worker's godown (Madan manufacturing co.) by going GOT - S - components - set Godown type (Ctrl+G) to Our stock with third party.
+13) Reciept of Finished goods (recieving finished goods from job worker).
+                           i) Material in voucher -- reference-->MI 1,  party name -> Madan manufacturing co.
+                          ii) in party details screen select existing order number 1/MMC (material receipt order) as order number.
+                         iii) consumption godown -- job worker godown (Madan manufacturing co.) from where the components/ raw materails are consumed to manufacture.
+                         iv) stock item pressure cooker will be auto filled, press enter to enter stock item allocation (raw materials) screen calculated according to BOM of pressure cooker.
+                          v) consider as primary item -> yes.
+                         vi) BOM name -> Standard pressure cooker (BOM of pressure cooker).
+                        vii) Godown, quantity, rate, amount will show up filled already.
+                       viii) accept and save.
+              Note - check the job work out order outstanding report, the report will be blank beacause once we after recieving total finished goods from job worker, the same will be cleared from
+                           from the outstanding report.
+14) Booking of job work charges (payement to the labour done by the job workers).
+        Note - we'll pass a purchase entry because we are purchasing labour only from the job workers.
+                          i) In purchase voucher set accounting invoice mode.
+                         ii) supplier invoice no. -> 2.
+                        iii) party name -> Madan manufacturing co.
+                        iv) under particulars -> job work charges.
+                         v) enter amount -> 110000 ( in our case ).
+                        vi) type of ref -> new ref.
+15) Payement to jow worker agains the purchase of labour made above.
+                          i) in payement voucher prefer to use single entry mode. press F12 twice and enable Preallocate bills for payement/reciept/ journal voucher to yes.
+                         ii) under accounts field select your bank ledger.
+                        iii) under particulars -- Madan manufacturing co. (job worker).
+                        iv) Bill-wise-details -- against ref - select existing ref ( amount - 110000) in our case.
+                         v) Ensure the current balance of Madan manufacturing co. becomes zero after passing the payement entry. this confirms that the job work out process is completed.
+
+**************************************Job work out process ends here***********************************************************************

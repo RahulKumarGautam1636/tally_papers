@@ -1,0 +1,32 @@
+RCM (Reverse Charge Machanism)
+          ⚾ NOTE - before understanding the RCM we first need to know about the normal taxing system of collecting tax which is known as FCM (Forward Charge Mechanism).
+🧿 FCM - In this system the seller takes the tax amount included in selling price from the buyer. Then the seller pays that tax amount to the goverment on behalf of the buyer. The same goes for
+                   purchase transaction. 
+🧿 RCM - As we see the Reverse keyword, in this tax collection system mostly the seller is found to be not eligible for paying tax to goverment for some reason like he is not registered
+                   (unregistered dealer) under GST or he is selling some speciefic goods/service that is forced to be charged under RCM system by goverment itself via some tax rules. in this case the 
+                   purchaser(reciepient) holds the liability to pay the tax. hence the purchaser himself creates the invoice and pays only the price of goods/service to seller and keeps the tax occured in
+                   this transaction and then he himself pays it to the goverment. Ex - paying fee to an Advocate (unregistered dealer).
+                   some services are such types that it can be charged under both system with some applied rules. Ex - Transport service (Rules - if the transporter chooses RCM system then tax rate will
+                   be 5% and 12% if he chooses to go with normal FCM sytem where he will be liable to pay the tax to goverment.
+Tally Entry - Purchasing stock item (Asian Paints) from an unregistered seller (Prashant Agrawal).
+           ⚾ Create ledger of Prashant Agrawal -> registration type (unregistered) -> set/alter GST details -> registration type (unregistered).
+           ⚾ Create purchase ledger named 'Unregistered purchases' under purchase group for a clear view in stock summary.
+           ⚾ Create stock item Asian paints in usual way and set GST rate 24%.
+           ⚾ Create (SGST/CGST) and (SGST/CGST on RCM) ledgers under duties and taxes in usual way for clear view of tax bifurcation.
+🧿 Step 1 - Make Purchase Entry - Party name (Prashant Agrawal) -> purchase ledger (Unregistered purchases) -> stock  item (Asian paints - units(100), rate(760)) -> don't appy GST -> save.        
+            ***We are not applying GST here because in this case tax will be automatically charged and calculated under RCM system. We can see that generated tax value in tax analysis. 
+                  (we'll pay only the selling price to the seller hence we don't need to furnish GST details here).
+            ⚾ confirm correctness - open gstr-2 report and look for your entry under URD purchases -> here shows 3 sections 1) total liability (total tax generated) 2) ITC Booked (liability increased and
+            adjusted for tax payment) 3) Balance liability (remaining amount that is to be booked(increase liability for payment)). you will find your total tax amount in balance liabilty that you need
+            to book (increasing tax liability for payment) in step 2 before payment of this tax.
+🧿 Step 2 - Booking ITC - Since the balance sheet doesn't show up this tax liability hence we need to mannualy increase our tax liability (credit GST ledger) and then pay the tax amount to goverment.
+            we'll debit our normal SGST/CGST ledgers and credit SGST/CGST on RCM ledger so that we can make payment (debit SGST/CGST on RCM and credit cash ledgers) in next step leaving 
+            normal GST ledgers in debit balances which we can use to reduce our next payable GST (Availing Input Tax Credit).
+            Open journal voucher -> Alt+J (GST-increase of tax liability and input tax credit-purchase from unregistered dealer) -> debit normal SGST(9120)/CGST(9120) ledgers with thier amounts (Make 
+            sure to enter half rate(12%) and total tax amount(76000) -> similarly credit the SGST(9120)/CGST(9120) on RCM ledgers -> provide GST details -> type of input (goods) -> save.
+            ⚾ check correctness - open gstr-2, our entry will have vanished from URD purchases and if we click on URD purchases we can see that tax is booked and shown under ITC Booked. Also see Balance 
+            Liability as Nil. this confirms that we booked our liabilty successfully.
+🧿 Step 3 - Making Payment of tax - Now using credited SGST/CGST on RCM ledgers we will pass payment entry of Tax to goverment.
+            Open payment voucher -> Alt+J (payment under reverse charge) ->  debit SGST(9120)/CGST(9120) on RCM ledgers and credit cash/bank ledger.
+            ⚾ check correctness - open balance sheet and see duties and taxes. we see negative balance and CGST/SGST are in debit amounts.        (debit means we we'll recieve ITC, credit means we'll pay tax)
+NOTE - According to rules RCM tax liability is always paid by cash/bank which means we cannot adjust it with input tax credit.

@@ -1,0 +1,13 @@
+Group company -- It's a funtion in Tally that puts two or more companies in a group to view its data alltogather in a single and mixed list.
+We can view informations from all companies alltogather such as balance sheets, accounts infos, ledger infos and all types of data related
+to accounts.
+
+How add company in a group --- select all the companies in a gateway of tally --- creat a group of companies --- enter details about the owner
+of the this and few other details --- add selected companies again.
+
+
+Set Credit limit ---- this is a funtion in tally used to set a and specify a limit on trasaction on a particular person or company or organisation
+it prevents all transactions above the set limit hence its useful in rocarding and adjusting minute changes or conditions in transaction.
+
+how to set limit --- first enable set credit limit by pressing and selecting it in f11 menu and then go to the ledger on which this limit is to be
+applied. set the limit in the altering mode of ledger. 

@@ -1,0 +1,35 @@
+26) GST calculation when we recieve any advance from a debtor (future sale) -
+       Since we need to file GST returns on monthly  basis hence there are two scenario that can happen in real situation.
+       Scenario - 1) You can recieve advance payment in current month but the sale will be copleted (full payment and delivery of goods) in next or upcoming months. in this
+            case we need to file the GST generated on the advance recieved in current month. Since transaction is not fully completed hence we will need some additional step to
+            make this advance GST entry so it can be seen in our GST reports and we can pay this in current month's GST returns.
+            ***Make stock item for which you're taking advance and that is to be sold in future - set GST rate (10%) on it and save.
+       Step 1 - Make the Advance reciept entry in reciept voucher using advance options (Alt + J) -> advance reciept -> choose debtor -> choose stock item/service ledger -> 
+                      enter advance amount (100000)-> note the taxable value(90909.10) and CGST(4545.45)/SGST(4545.45) (By default tally prime calculates the inclusive tax) ->
+                      advance -> name bill like 'advance on item name' -> choose recieving a/c (bank/cash) -> accept screen.  
+       Step 2 - Increase the tax liability manually - Since these advance GST entries are not included in GST returns hence we need to manullay increase the tax liability and
+                      pay to the goverment. for this create a ledger named 'Tax paid  on advance recieved' under group current assets (it is our assets because it is holding our advance
+                      taxes) -> include in assessble value (GST) -> appropriate to (Goods) -> method of calc (based on value).
+                      Now create two more ledgers named 'SGST/CGST on advance recieved' in same way you make normal ledgers for CGST and SGST.
+                      Now the Entry - Open journal voucher -> Statuary Adjustement (Alt + J) -> on a/c of advance reciepts -> debit 'Tax paid on advance recieved' with total tax(9090.90)
+                      (CGST+SGST) generated in step 1 -> credit CGST/SGST on advance recieved with CGST(4545.45)/SGST(4545.45) amounts (make sure to enter half of total rate (5%)
+                      and total advance amount (100000) properly otherwise it will not be visible in GST report under tax liability(advances recieved)) -> accept and save.
+       Step 3 - Payment of Advance tax - Open payment voucher -> Stat adjustment (Alt + J) -> Advance payment under reverse charge -> debit 'CGST/SGST on advance recieved'
+                      with CGST(4545.45)/SGST(4545.45) amount which will make its curr. balance zero -> credit Bank/cash -> accept save.
+       Step 4 - Make the sale entry - Time to issue the sale bill for the debtor. Make usual entry for that selling item (price-200, units-1000pcs, total bill amouont-200000) -> apply 
+                      GSTs(total-20000) -> choose against ref in in bill-wise-detail and choose bill created in step 1 and enter the amount(100000) in it -> again take new ref and adjust 
+                      the remaining amount (120000) -> accept and save.
+                      ***NOTE that in reality the debtor will only pay the remaining sale amount (100000), by taking against ref we included/mixed it with the advance payment (100000)
+                             done by the debtor which makes total payment equal to 200000 and now we applied GST to this new total amount(200000) which gives tax value(20000).
+                           since we already paid tax on advance amount (100000) hence we need to deduct paid tax (9090.90) from current tax value(20000) and it is done in next step.    
+       Step 5 - Decrease the tax liability - since we already paid advance tax hence we need to decrease our current tax liability (see detailed reasons discussed above in NOTE).
+                      (current generated tax(20000)- tax paid in advance(9090.90) = current tax liability(10909.10)).
+                      open journal voucher -> (Alt + J) -> sales against advance reciepts voucher -> just pass reverse entry done in step 2 (debit CGST/CGST on advance recieved with their
+                      values(4545.45) and credit Tax paid on advance recieved with total tax value(9090.90)) making its balance zero.
+                      This decreses our tax liability we can see this in balance sheet under duties taxes with reduced tax liability(reduced from 20000 to 10909.10).
+       
+       Scenario - 2) In second case the sale will be completed (recieved full payment and delivered the goods) in present months.
+                            ***In such cases you just need to perform Step 1 (advance reciept entry) and Step 4 (the sale entry). we don't need to do any adjustment to tax liability because at 
+                                  the this entry becomes same as other normal GST entries.
+    
+  

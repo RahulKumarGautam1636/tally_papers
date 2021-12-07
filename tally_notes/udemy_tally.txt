@@ -1,0 +1,76 @@
+1) We can create our own group of 'Employees expenses' and use it under every ledger than deals with expense on employees. (80)
+2) ***If any transaction is done in credit terms then it's entry will be in journal voucher. (80)
+3) Capital entry - owner is giving money to tha cashbox of company hence credit the giver (owner) and debit the reciever (cashbox). (81)
+4) To === Credit. (83)
+5) Cash investment by owner goes into reciept voucher. owner(credit)->cash(debit).
+6) Direct expenses - Any expenses that directly belong to the company's production is taken as direct expenses. Ex - Wages, material costs.
+     Indirect expenses - Any other expenses to company is treated as indirect expenses. Ex - Salary(not salary  payable[current liabilities]), rent,  bills etc.
+7) Inventory - Things related to stock items. (82)
+     ***in purchase entry if we not want to enter name of things purchased then we need to make entry in Accounting invoice(particulars) mode.
+8) Credit(udhar) Purchase/Sale - in this type of transaction you need to create ledger of the second party you're dealing with. (85)
+9) Single Entry mode - upper field is always filled with recieving(reciept mode) or paying accounts(payment mode). (86)
+10) Journal Entries - Adjustment entries - Those transactions that have not been done yet but will be done in the future, hence we need to record them in current time
+       to have a record of those entries in future. Example - suppose we need to pay electric bill today but we are unable to pay due to any reason but we'll pay in future. (87)
+       According to rule of accounting we must make an entry for this to have a record of it in future. so the entry will be in journal voucher (for adjustment) like this.        
+       Electric bill A/c -                                       Dr. 1000
+       O/s Electric bill A/c -                               Cr. 1000                               (Temporary ledger under current liabilities)
+11) Trial balance - It is a table where all the liabilities and assets are plotted side by side to see thier final balances. (89)
+       ***IF your entries are correct then we will see both sides with exactly matching final balances, this confirms the correctness of entries made by us.
+       Print Trial/normal balance sheet - open trial balances -> Ctrl + P -> preview/print.
+       Gross profit = Total Expense on goods(purchase a/c + direct expenses + closing stock) - Total Income from goods(sale a/c + direct incomes). (89)
+       Schedule-6 format of balance sheet - vertical balance sheet. (89)
+12) ***Print/preview anything by just open that page and press Ctrl + P. (92)
+13) Stocks - Last financial year closing stock becomes openins stock for current new financial year.
+14) Stock summary - in stock summary goto F12 and activate opening balance, goods inwards(purchased), goods outwards(sold), stock 
+        with zero balance for a better detailed view of stocks. closing balance is goods left in current stocks.
+        Aging analysis - tracks the time/days spent by an item in our stocks. Good to use the track the aging of perishable items like milk and 
+        other food items or medicines which have an expiry date. Goto display more reports -> statements of inventory -> aging analysis. (94) 
+        Stock query - Shows detailed report of every transaction related with an speciefic stock item.
+15) Manufacturer's selling price to dealer - (Cost + Excise) + (Cost + Excise)*Vat%.    (95)
+                                                                               Ex- (100000+10000) + (100000+10000)*12% = 123200
+        Dealer's selling price to customer - (Manufaturer's cost + Manufacturer's Excise + Profit Margin) + (Manufaturer's cost + Manufacturer's Excise + Profit Margin)*Vat%
+                                                                      Ex - (100000 + 10000 + 11000) + (100000 + 10000 + 11000)*12% = 135520    
+16) We can set GST at company level (every entry will have a predifined GST rate). Goto F11 -> Enable GST -> set/alter gst rate.
+        We can also set at Stock Group level (every item of stock group will have a predifined GST rate). create/alter stock group -> set/alter GST rate. (97)
+        ***Don't set GST rates for individual stock items if you already set it on stock group level or company level.
+17) GSTR - 1 = All the Entries under Sales.
+        GSTR - 2 = All the Entries under Purchases.
+        GSTR - 3B = Net return or net ITC available to us.
+        B2B = Business to Business (transactions between two businesses).
+        B2B = Business to Customer (transactions between business and customer).
+18) GST sale to Unregistered dealer - Goto dealer's ledger -> set registration type to unregistered -> set/alter GST and again set registration type to unregistered. (100)
+        GST sale to Consumer - process will be same as shown above , just replace unregistered with consumer. (101)
+19) Large - Transactions that are done over amount of 2.5 lakhs.
+        Small - Transactions that are done below amount of 2.5 lakhs.
+20) Set automated GST rate for different months - Tally will automatically implement different  GST rates in different months as you will set. Goto F11 -> enable GST -> set/alter GST -> Alt + W.
+        here you can set GST rate for different months on company level (make sure you have not set any GST rates on stock group or stock item level). (103)
+21) Set GST on item rate(selling price)  - GST rate will change will change according item's selling price as you will set it here. Goto that stock item -> set/alter GST -> on item rate -> here you can
+        set different rate of GST according to item's selling price. (104)
+22) Credit note for sales returns - If a customer returns goods sold to him then we must create a credit note to record this sales return and credit the customer with an amount of that returned item.
+        For entry open Credit note voucher -> select party ledger -> sales return a/c -> enter item details -> apply GST if applicable -> reason for issuing note (sales return) -> agst ref (if available). (105)
+        Debit note for purchase returns - process will be same just choose Debit note voucher for entry and also we don't need purchase returns a/c for this entry.
+        Must check the effect of these entries in GST reports.
+23) ***GST reports don't shows the transactions that have done with wrong GSTINs to solve this Goto GST report -> uncertain transactions -> place yellow line on mismatch entries and press Alt + V.
+        Now tally will treat wrong/random GSTINs as correct ones that you entered for educational purposes. (105)
+24) Nil Rated - means tax of 0%. (make sure you have entered GSTIN for the party you're selling/purchasing to).
+25) Exempt - Taxes are not applied to a customer or dealer that are outside the country means GSTs are not applied on exports. For such entries GSTs on goods are exempted.
+        Example entry - Make ledger named 'Export sales' under sales group -> selt/alter GST -> nature of transaction (not applicable) -> taxability (exempt). now create party ledger with different coutry and state.
+        Now make the entry as usual using 'Export sales' ledger and view the tax analysis(Ctrl+I). we'll see not tax are implemented on this entry because it's exempted. (108)
+26) GST with Advance Payments - Look for file 'gst_with_advance_payment' in documents folder.
+27) SEZ - SEZ means Special Economic Zone. Some companies/dealers are registered under SEZ Zone and most of them will get special exemption under Income Tax & other taxes. To make transaction with
+        them create/alter their ledger -> set/alter GST details(yes) -> party type (SEZ). And then do the usual entry with them even with GST. 
+28) Selling services entries - use accounting invoice mode (which let's us use services ledger to be used as stock items for sale) in seles voucher to make these type of entries. (114)
+29) ORDER PROCESSING - 
+        1) Purchase order ----> Reciept Note ----> Purchase Invoice (purchase entry) ----> Purchase Return (if goods have any defects) and make debit note  ----> Recieve Payment.
+        1) Sales order ----> Delivery Note ----> Sales Invoice (sales entry) ----> Sales Return (if goods have any defects) and make credit note ----> Make Payment.
+30) E-Way Bill - It is unique document/bill which is electronically generated for the specific movement of goods from one place to another, either inter-state or intra-state.
+                              you can take your E-way bill registration id from the official site (ewaybill.nic.in).
+        NOTE - It is required only if the bill amount is higher than rs.50000 under current GST regime.
+        Enable Features - F11 -> enable GST -> set/alter GST -> E - way bill applicable (yes) -> Threshold value includes (invoice value) -> threshold limit (50000 - E-way bill will
+        become mandatory if bill value exceeds value of 50000).
+        Create Transporter's (Amba transport services) ledger - under (sundry creditor) -> bill-by-bill (yes) -> registration type (unregistered) -> set/alter GST details -> registration type (unregistered)
+        -> is a transporter (yes) -> enter transporter id (if available). 
+        Nos suppose we're selling an item and delivering the goods through this transporter then entry will be as shown below. 
+        Make a normal sales entry with GST just enter yes to Provide E-way bill details -> document type (tax invoice) -> seller address -> buyer address -> distance in Kms (888)
+        transporter name (Amba transport services) -> vehicle no. -> vehicle type (regular) -> date -> accept and save.
+        check reports - D -> O -> E-way bill.

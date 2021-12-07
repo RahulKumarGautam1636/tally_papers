@@ -1,0 +1,4 @@
+to view indirect expenses in profit and loss field --- if you can't see indirect expenses in profit and loss then go to accounts info -- groups
+--- indirect expeses and then set method of allocating to by value. Now we can see idirect expeses in profit loss field on the left side.
+
+
