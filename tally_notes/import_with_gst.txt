@@ -1,0 +1,23 @@
+IMPORT OF ITEMS/SERVICES WITH GST (purchasing from international creditor)
+***IMPORT is charged under RCM system - since in this case the seller is an international entity which is most possibly not registered under any taxing system in india.
+      hence they cannot forced to pay tax under FCM which makes RCM only way to charge the taxes.
+Questions - company imports internet installation services from Shree shyam supplies (canada) worth 100000. pass the entry and pay the tax to government. Also take/
+                      evaluate input tax credit (ITC).
+Create Ledgers - 
+             1) Creditor (shree shyam supplies) -> sundry creditors -> country (canada).
+             2) Tax paid under RCM -> current assets -> include in assesable value calculation for (GST) -> appropriate to (services) -> method of calc (based on value). 
+             3) Create normal IGST and 'IGST on RCM' ledger under duties and taxes in usual way (creating two defferent ledgers for clear view in balance sheet).
+Step 1 - Make Purchase Entry - make a normal purchase entry of worth 100000 but don't apply IGST ledger here (because it's is charged under RCM). IGST is still applied 
+               behind the scene we can see this in tax analysis (notice the note in left-bottom of tax analysis window).
+               Check correctness - look for your entry in GSTR-2 under import of services -> balance liability.
+Step 2 - Increase Tax Liability - Since RCM taxes are not charged in the purchase invoice (normal manner) hence it is not shown in balance sheet which means we have no
+               liability (credit value) on our IGST ledgers hence we need to manually create liability on IGST ledger with help of 'Tax paid under RCM (current assets)' ledger.
+               The Entry - Open journal voucher -> Alt+J -> type of duty (GST) -> nature of adjustment (increase of tax liability) -> additional details (import of services) -> debit
+               'Tax paid under RCM' with tax amount (18000) and credit 'IGST on RCM' (18000 - must enter rate - 18% and taxable value - 100000 of original purchase).
+               Check correctness - look for your entry in GSTR-2 under import of services -> booked liability.
+Step 3 - Payment of GST - since our 'IGST on RCM' ledger which is GST ledger is now in credit value, we can use this to pay the tax.
+               Open payment voucher - Autofill (Ctrl+F) -> payment type (recipient liability) -> debit 'IGST on RCM' with 18000 -> credit cash/bank (18000).
+Step 4 - Increase of Input Tax Credit -  
+               Open journal voucher - Alt+J -> GST -> nature of payment (increase of input tax credit) -> additional details (import of services)  -> debit IGST ledger with 18000 
+               -> credit 'Tax paid under RCM' with 18000 -> save and exit.
+               This leaves IGST ledger in debit balance which we can use it to reduce our upcoming taxes (availing ITC).
