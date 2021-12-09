@@ -1,0 +1,29 @@
+Reconciliation - it is a process of matching transactions that have been recorded internally against monthly statements from external sources such
+                              as banks. In simple words reconcilliation is done to fix the mismatch our account books or entries with bank books or bank 
+                              statements.
+Reasons for mismatch - A mismatch happens when we make an entry in tally software ware but in reality that entry is completed in after a time 
+                                            time interval (after few days). Ex - delayed cheque - suppose we paid with a cheque to someone and immediately made an
+                                            entry to tally software but we don't know that when customer will clear this cheque. He may take few days to do so hence
+                                            this will make date mismatch between our A/c books and bank statements. see few more Examples - 
+                                            1) bank charges
+                                            2) cheque bounce
+		       3) Monthly fixed payments (EMIs)
+Openin BRS (Bank Reconcilliation Statement) - Making entries of uncompleted/unconciled entries of previous months/years to current month/
+                        year's unreconciled entry books. in simple words making list of previous month's/year's unconciled entries.
+                        Goto banking -> bank reconcilliation -> select your bank -> opening BRS (Alt+H). Now take the list of unconciled entries and fill info.
+                        date of entry -> name of party -> deposit (recieved money)/withdrawal (paid money) -> debit (if recieved)/ credit (if paid) -> cheque
+                        no. (cheque1) -> date of issuing cheque (date of entry).
+                        ***Now note the total closing balance and set it as opening balance for the bank ledger. 
+Setting Cheque Printing - open bank ledger and fill additional details. set/alter cheque books (yes) -> set cheque details with name -> enable cheque
+                                               printing (yes).
+Reconcilliation - If you have bank statements of current financial period then goto bank reconcilliation in banking where we can find all the 
+                              unreconciled entries. now match the entries and fill the field bank date with the date mentioned in bank statement for the respected
+                              entries. 
+                              1) If you don't find an entry (ex - bank charges) in your tally but it's present in bank this is a mismatch. To resolve this we'll make this
+                                   entry immediately and then reconcile it. create voucher (Alt+J) -> make that entry and come bank to reconcilliation window and
+                                   reconcile it by entering bank date.
+                              2) If you don't find an entry (ex - a debtor didn't paid money online) in bank statement - in this case just delete this entry from your
+                                   accounts books.
+***When Reconcilliation of all entries are completed then note the final closing balances of accounts books and bank statement. If they are found 
+                  equal then reconcilliation is completed successfully, if not then we may have comitted any mistake in the process.
+1  
