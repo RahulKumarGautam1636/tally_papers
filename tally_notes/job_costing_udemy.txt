@@ -1,0 +1,21 @@
+JOB COSTING IN TALLY PRIME - It is like bigger version of manufacturing process. We take bigger projects/jobs (ex-manufaturing building) from
+         customers and record every expenses on manufacturing/completing this job then finally sell it to the customer who had given this job order.
+
+Step - 1) Create a new Company.
+Step - 2) Enable job costing, Bill wise Details & cost center.
+Step - 3) Create cost center with job costing's name.      **use for job costing (yes).
+Step - 4) Create Consumption Godown with cost center.     **allow storage.. (yes) -> set job project (choose your job project).
+Step - 5) Create supplier and Customer ledgers.
+Step - 6) Create purchase and Sale Ledger with Cost Center applicable (yes).
+Step - 7) Create Expense (transportation chargers, wages) Ledgers under direct expenses with Cost center applicable (yes).
+Step - 8) Create Transfer and Consumption/Manufacture voucher class.   **alter -> voucher type -> stock journal -> name of class
+                   Create two classes - 1) Transfer -> use class for inter-location Transfers (yes) -> save.
+                                                              2) Consumption -> use class for inter-location Transfers (no) -> use class for job costing consumption (yes).
+Step - 9) Create Raw material Items under group Raw materials (should quantity be added - yes) with GST rates.
+Step - 10) Purchase Raw materials and store in main location (predifined godown). 
+Step - 11) Transfer Raw material from main location to consumption godown (using transfer voucher).
+Step - 12) Manufature the Job order product (manufacture building) using consumption/manufacture voucher.
+Step - 13) Make payment (single entry mode) to our expense ledgers (expense ledgers will pick up the job costing cost center).
+Step - 14) See job costing reports and decide your profit - D -> E -> job work analysis -> choose your job project. 
+Step - 15) Sell the order item to the cutomer after adding your profit. (use accounting voucher mode, sale ledger will pick job cost center)
+Step - 16) see report again - D -> E -> job work analysis -> choose your job project. 
