@@ -1,0 +1,51 @@
+SALARY = Basic salary + OverTime(OT) + Dearness allowance (DA) + House rent allowance (HRA) + Travelling allowance
+                  - Provided fund (PF)
+                  - Employer's Contribution to EPF (3.67% of basic salary to be deposited in employer's PF Account). 
+                  - Employer's Contribution to EPS (8.33% of basic salary to be deposited in Employer's Pension Scheme).  
+                  - Professional tax (PT - A tax collected by government on income of employees).
+DA = calculated on basic salary and added to employee salary to mitigate the impact of inflation on people. 
+HRA = 30% of (basic pay + DA).
+PF = if basic pay is less than 6500 then PF is 12% of earned basic pay else it will be rs.780.             [earned basic = current month's earning after eliminating leaves/absent]
+EPS = 8.33% of basic pay if basic pay is less than 6500 else rs.541.
+EPF(3.67% of basic pay) = PF(12%) - EPS(8.33%)
+Professional tax = Tax amount is Zero if current months total earning is less than 5000, rs.175 if it's between 5001-10000 and 200
+                                 or 300 if greater than 10000. Tax amount is deducted and deposited to the bank by the employer. 
+ 
+
+Pay heads creation ---->
+
+      INCOMES ------------------------------------------>
+                     1) Basic pay -> cal for gratuity (yes)     [Optional]
+                                              -> set/alter income tax -> income tax com.. (basic salary) -> accept       [Optional]
+                                              -> calc period -> user defined (26 days - if need user defined working days).
+
+                     2) CA -> calc type (Flat rate) -> calc period (months).
+                     3) HRA -> calc type (as computed value) -> calc period -> months -> on speciefic formula -> basic pay * 20%.
+                     4) Overtime -> calc type (production) -> prod. type (overtime).
+                     5) Variable pay or Incentive -> income type (variable) -> calc type (as user defined value).
+
+    DEDUCTIONS -------------------------------------->
+                     6) Professional tax -> emp. stat. deduction -> professional tax -> computed value -> months-> on current earnings total ->
+                                                                 0 to 5000 -> rs.0
+                                                         5000 to 10000 -> rs.100
+                                                      10000 to 15000 -> rs.150
+                                               greater than 15000 -> rs.200
+                     7) Emp. ESI deduction 1.75% -> emp. stat deduct -> emp. state insurance -> on current earning total -> 1.75%.
+                     8) Emp. PF deduction 1.75% -> emp. stat deduct -> PF Account (a/c no.1) -> basic pay -> 12%.
+                     9) Income tax -> emp. stat. deduct -> income tax -> calc type (as per income tax slab).
+                   10) Gratuity -> pay head type (Gratuity) -> current liabilty -> set/alter income tax (no).
+                   11) PF Admin charges 0.65% -> empoyers other charges -> admin charges (a/c no. 2) -> curr. liabilty -> affect salary (no) -> 0.65%.
+
+      EMPLOYER'S CONTRIBUTIONS -------------------------------------->
+                   12) Employer's cont. to EPF 3.67% -> employers stat. cont. -> PF Account (a/c no.1) -> indirect exp. -> as computed -> basic pay
+                                                                                         -> upto 15000 set 3.67% and 550.50 for greater amounts.
+                   13) Employer's cont. to EPS 8.33% -> employers stat. cont. -> EPS Account (a/c no.10) -> indirect exp. -> as computed -> basic pay
+                                                                                         -> upto 15000 set 8.33% and 1249.50 for greater amounts.
+                   14) Employer ESI 4.75% -> employers stat. cont. -> Employees state insurance -> indirect exp. -> as computed -> on current earnings total -> 4.75%.
+            
+      EDLI ------------------------------------------------------------------------>           
+                   15) EDLI Admin 0.01% -> employer's other charges -> EDLI admin charges (a/c no.22) -> cont. min of rs.2 (yes) -> current liability -> affect salary (no) -> 0.01%.
+                   16) EDLI Cont. 0.5% -> employer's other charges -> EDLI cont. (a/c no.21) -> current liability -> affect salary (no) -> 0.50%.
+                                                                                       
+                  
+                                                                                         
