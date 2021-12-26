@@ -1,0 +1,30 @@
+***MULTIPLE CURRENCY IMPORT AND EXPORT***
+
+Q) Goods sold to Alex (US) - Samsung 32GB, 5pcs @ $2000 each. Recieved the payment and adjust the forex exchange gain/loss.   
+      (Rate of exchage when sold - Rs.50/$ and Rate of exchange when recieved the payment - Rs.72/$)
+						                
+*** Features needed  --- 1) Create dollar ($) currency and set a standard/default rate of exchange (optional).
+       		         2) Create Alex ledger. Make sure to turn on bill-by-bill and don't alter currency for ledger (keep it Rs.). 
+                    	         3) Make sure to set Yes to "Preallocate bill for payment/receipt/journal vouchers" in F12 menu.
+                                               4) Create Export ledger under sales for bifurcated view of export sales in reports.
+
+Step - 1) Enter reference number pass an usual sale entry for Alex under Export ledger. Just enter Rate of item with dollar sign ($2000) so that tally will automatically implement the default
+                  Rate of Exchange (change it if needed) on it to show the total amount in Indian currency. For our example - total amount will be ($2000*50)*5pcs = Rs.500000.
+Step - 2) Recieve the payment from alex - Reciept voucher -> credit Alex -> against ref (take sale bill) -> set Rate of Exchange (change it to Rs.72/$ as per question) -> debit cash/bank with
+                  total amount 720000 (calculated with new rate of exchange).
+               
+***Changed Rate of exchange when recieving payment will create forex gain of 220000 (720000-500000). this is our indirect income that is needed to adjusted in journal entry.
+      Can see Unadjusted Forex Gain/Loss warning in balance sheet or trail balance.  
+
+***To Adjust Forex Gain/Loss --- Alter jorunal voucher -> create new class name - Forex Gain/Forex Loss -> use for Forex adjustments (yes) -> ledger name (create Forex Gain/Loss) 
+                                                                Ledger under indirect incomes/expenses and select it.       [Cannot take two ledgers in one class hence create two classes for each of Forex Gain and Forex Loss]
+
+***The Adjustment entry - Open Journal (Forex Gain class) voucher -> debit Alex -> against ref (take sale bill) -> credit Forex Gain (220000) -> accept & save.
+
+Confirm Success - Unadjusted Forex Gain/Loss warning diappears from balance sheet/trial balance. See adjusted amount under indirect expenses/incomes under Profit & Loss A/c and trial balance.
+
+
+                 
+
+
+                                     
