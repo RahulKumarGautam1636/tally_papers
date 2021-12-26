@@ -1,0 +1,17 @@
+Budget and Scenario Management - This system is used to track and mantain budget for diffrent scenario/events. In this process we allocate some amout of money to some
+                      speciefic group and ledgers for a definite interval of time and the tally tracks incomes and expneses for that ledger and group. we can see different information
+                      and transaction effecting our budget for this time period in budget management reports (GOT - D - T - F10).
+
+Example - Setting budget rs.60000 for the Daily Office Expenses of office for two months (taking 30days/month).
+
+Search for budget -> create -> Name of Budget -> primary -> period of budget -> set/alter group and ledgers ->                  [select groups and ledgers for which you want turn on the budget management]
+                          for our exaple -> Office expenses ->                -> 1/4/20 - 31/5/20 -> indirect expenses ->
+
+*** Type of Budget - We get two option to select under "Type of Budget" both are nearly same. the only difference is how they are shown in reports.
+                                     1) On nett transaction - when it is selected, we get detailed reports speciefying per day permissible transaction amount and amount spent or remaining.
+                                     2) On closing balance - This don't reflects the detailed report. shows only the allocated, spent and reamaining amount.
+
+***Now let's pass some entries to see its effect - 
+               1) Paid rent rs.30000 in cash on 2/4/20.
+
+***Reports ---- 1) On nett transaction - 
