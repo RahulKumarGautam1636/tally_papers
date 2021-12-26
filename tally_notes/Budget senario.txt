@@ -1,5 +1,0 @@
-Budget on senario -- this feature is used in tally to maintain and manage Budgets. turn on this feature from f11 menu.
-How to use -- Go to Account info - budget - set name for budget - time interval for the validity of budget - select if you want to apply it
-       Group or Ledgers - Accept and save. Now we are all set to make transaction using budget control and see the reports using
-        following steps.
-How to see report -- Go to Trial balance - alt + b.
