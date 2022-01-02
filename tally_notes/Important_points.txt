@@ -1,0 +1,10 @@
+1) Opening balance for Drawings A/c is taken in negative or debit balance.
+2) [to be tested] Always pass rejection in/out entry after sale/purchase returns (after passing debit/credit note) to see effect of returns in inventory.
+      ***Credit/Debit note can alter the balance of creditor/debtor but it cannot alter inventory stocks (stock summary). we must pass
+            Rejection out/in entry to see effect of purchase/sales returns on stock items.
+3) Suspence account ledger - used when sender/reciever of money is unknown. created under suspence group and it's nature is liabilty.
+4) Reversing journal
+5) Inventory valuation - FIFO and LIFO - vid (inventory valuation : Nitin Goel).
+6) Buy 1 get 1 entry - use Different actual and billed quantity (yes).
+7) Buy 1 get another item free entry - activate Allow zero values transaction (yes) present in F11 or in sales voucher type (alter) in tally prime.
+
