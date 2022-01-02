@@ -1,0 +1,12 @@
+POS - Point of Sale - Creating vouchers for retail sale just like we get in shopping malls or ordinary grossary shops.
+
+Step - 1) Create new Voucher called "POS sales" under sales group and put yes to "Use for POS invoicing" and also set the optional messages to print
+                 on voucher like "Thank you.." or "Visit again..". You can also set declaration like "goods once sold will not be taken back in declaration field.
+
+Step - 2) Create your items and set their Standart selling rates so that tally will automatically fetch their rates during posting entries.
+
+Step - 3) For entry, in accounting voucher press F8 and select "POS sales" voucher. pass entry as usual sales entry. choose between multi-payment
+                 mode and single payment mode (cash) by pressing Alt + I. 
+
+Gift Voucher - If buyer wanted to use gift voucher payment then create "Gift Voucher" ledger under sundry debtor and use it. left amount can be
+                          adjusted with rest of available payment methods.
