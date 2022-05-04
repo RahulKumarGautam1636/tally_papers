@@ -1,8 +1,3 @@
-SALARY = Basic salary + OverTime(OT) + Dearness allowance (DA) + House rent allowance (HRA) + Travelling allowance
-                  - Provided fund (PF)
-                  - Employer's Contribution to EPF (3.67% of basic salary to be deposited in employer's PF Account). 
-                  - Employer's Contribution to EPS (8.33% of basic salary to be deposited in Employer's Pension Scheme).  
-                  - Professional tax (PT - A tax collected by government on income of employees).
 DA = calculated on basic salary and added to employee salary to mitigate the impact of inflation on people. 
 HRA = 30% of (basic pay + DA).
 PF = if basic pay is less than 6500 then PF is 12% of earned basic pay else it will be rs.780.             [earned basic = current month's earning after eliminating leaves/absent]
@@ -12,40 +7,61 @@ Professional tax = Tax amount is Zero if current months total earning is less th
                                  or 300 if greater than 10000. Tax amount is deducted and deposited to the bank by the employer. 
  
 
-Pay heads creation ---->
+Creating Masters - 
+1) Employee category - Ex. Head office and Regional offices. Set yes on Both Allocate Revenue/Non-revenue items. Otherwise category will not be shown in autofill menu in during payment.
+2) Employee group - Ex. Sales Department, Administration and Marketing Department.
+3) Create Employees under their respective groups.
+4) Create Time Units Hour and Minutes and Hour of 60 Minutes.
+5) Create Attendance/Production type - Present, Absent and Overtime. Can aslo Define Own Calendar type -> name (My Calendar) -> Under (User Defined Calendar type).
+6) Create Basic Pay Heads - Bsic Pay, DA, HRA, Conveyance, Overtime, Canteen Deductions. 
+   Also create Pay Head Salary payable under Current liability.
 
-      INCOMES ------------------------------------------>
-                     1) Basic pay -> cal for gratuity (yes)     [Optional]
-                                              -> set/alter income tax -> income tax com.. (basic salary) -> accept       [Optional]
-                                              -> calc period -> user defined (26 days - if need user defined working days).
+Salary Processing Without Statuary Deductions - 
+7) Define Salary details on Employees, Employee groups or both (both in my case).
+8) Record Attendance voucher.
+9) Create Liabilty in Salary Payable Payhead. 
+	1) Pass Mannual entry for General allowance (ex-Canteen Deductions) in Payroll voucher (Ctrl+F) -> Process for (User Defined) -> Salary Payable -> Enter Amount manually in Entry.
+	2) Pass normal Salary Payable entry in Payroll voucher (Ctrl+F) -> Process for (Salary) -> Salary Payable. Amounts will be auto calculated.
+10) Payment of Salary from payment voucher (Ctrl+F) -> Salary payment.
 
-                     2) CA -> calc type (Flat rate) -> calc period (months).
-                     3) HRA -> calc type (as computed value) -> calc period -> months -> on speciefic formula -> basic pay * 20%.
-                     4) Overtime -> calc type (production) -> prod. type (overtime).
-                     5) Variable pay or Incentive -> income type (variable) -> calc type (as user defined value).
+Salary Processing with Statuary Deductions -
+11) Statuary Deductions - 
 
-    DEDUCTIONS -------------------------------------->
-                     6) Professional tax -> emp. stat. deduction -> professional tax -> computed value -> months-> on current earnings total ->
-                                                                 0 to 5000 -> rs.0
-                                                         5000 to 10000 -> rs.100
-                                                      10000 to 15000 -> rs.150
-                                               greater than 15000 -> rs.200
-                     7) Emp. ESI deduction 1.75% -> emp. stat deduct -> emp. state insurance -> on current earning total -> 1.75%.
-                     8) Emp. PF deduction 1.75% -> emp. stat deduct -> PF Account (a/c no.1) -> basic pay -> 12%.
-                     9) Income tax -> emp. stat. deduct -> income tax -> calc type (as per income tax slab).
-                   10) Gratuity -> pay head type (Gratuity) -> current liabilty -> set/alter income tax (no).
-                   11) PF Admin charges 0.65% -> empoyers other charges -> admin charges (a/c no. 2) -> curr. liabilty -> affect salary (no) -> 0.65%.
+  i) PF Deductions - i) Employees PF deduction at 12% -> PF a/c no.1. 12% of Basic+DA.                          Note - DA is allowed only by government organisations.
+		      ii) Employer's contribution in PF at 12% that is divided into two sub pay heads.
+			    a) Employer's EPS contribution 8.33% -> EPS a/c no.10. Basic+DA -> 8.33% upto 15000 and rs.1250 on above 15000.
+			    b) Employer's EPF contribution 3.67% -> PF a/c no.1. Specified formula (Employees PF deduction at 12% - Employer's EPS contribution 8.33%) - percentage (100%).
 
-      EMPLOYER'S CONTRIBUTIONS -------------------------------------->
-                   12) Employer's cont. to EPF 3.67% -> employers stat. cont. -> PF Account (a/c no.1) -> indirect exp. -> as computed -> basic pay
-                                                                                         -> upto 15000 set 3.67% and 550.50 for greater amounts.
-                   13) Employer's cont. to EPS 8.33% -> employers stat. cont. -> EPS Account (a/c no.10) -> indirect exp. -> as computed -> basic pay
-                                                                                         -> upto 15000 set 8.33% and 1249.50 for greater amounts.
-                   14) Employer ESI 4.75% -> employers stat. cont. -> Employees state insurance -> indirect exp. -> as computed -> on current earnings total -> 4.75%.
-            
-      EDLI ------------------------------------------------------------------------>           
-                   15) EDLI Admin 0.01% -> employer's other charges -> EDLI admin charges (a/c no.22) -> cont. min of rs.2 (yes) -> current liability -> affect salary (no) -> 0.01%.
-                   16) EDLI Cont. 0.5% -> employer's other charges -> EDLI cont. (a/c no.21) -> current liability -> affect salary (no) -> 0.50%.
+ ii) Employer's Other charges - i) EDLI contributions 0.5% -> A/c no.21 -> PF Gross -> 0.50%
+				     ii) EDLI admin charges 0.01% -> A/c no.22 -> PF Gross -> 0.01%
+				    iii) PF admin charges 0.85% -> A/c no.2 -> PF Gross -> 0.85%
+
+iii) ESI Deductions - i) Employees ESI Deduction 1.75% -> Employee Stat deduction -> emp state insurance -> Add all earning payheads(basic+DA+HRA+Conveyance+overtime) -> 1.75%.
+			   ii) Employer's ESI contribution 4.75% -> Employer's Stat contributions -> emp state insurance -> Add all earning payheads(basic+DA+HRA+Conveyance+overtime) -> 4.75%.
+
+ iv) Professional Tax - Employees stat deduction -> on current earnings total -> 0 upto 15000 and 200 for above 15000.
+
+  v) NPS (National Pension Scheme) - i) Employees NPS deduction 10% (Tier-I) ->	employees stat deduction -> National Pension Sheme Tier-I -> Basic pay -> 10%.
+					        ii) Employees NPS deduction 10% (Tier-II) -> employees stat deduction -> National Pension Sheme Tier-II -> Basic pay -> 10%.
+					       iii) Employer's NPS contribution 10% (Tier-I) -> employer's stat contribution -> National Pension Sheme Tier-I -> Basic pay -> 10%.
+
+12) Define Salary (Update) details - Add all Statuary pay heads except 3 Payheads under Employer's other Charges (EDLI) in Salary details.
+13) Create Pay heads PF Payable, ESI Payable and NPS Payable under current liabilities.
+14) Record Attandance in Attandance voucher.
+
+Create Liabilty for Salary, PF, ESI and NPS - 
+15) Process for Salary - Payroll voucher - (Ctrl+F) -> process for (Salary) -> Salary payable. 
+    Note - Only Pay heads that are related to employees will be shown in entry with deduction/addition amount. Pay heads contributing from Employers will be processed in next step.
+16) Process for Employer's contribution towards PF - Payroll Voucher (Ctrl+F) -> process for (PF contribution) -> PF Payable (created pay head).
+17) Process for Employer's contribution towards ESI - Payroll Voucher (Ctrl+F) -> process for (ESI contribution) -> ESI Payable (created pay head).    [Not calculated ??]
+18) Process for Employer's contribution towards NPS - Payroll Voucher (Ctrl+F) -> process for (NPS contribution) -> ESI Payable (created pay head).
+19) Process for Employer's other charges - i) Create a normal ledger under indirect expenses named "PF Admin charges".   (if shown - Use for payroll -> No).
+							ii) Now open journal voucher (Ctrl+F) -> PF other Charges -> Expense ledger (PF admin charges created above) -> Select all 3 EDLI pay heads.
+
+Payment of Salary, PF, ESI and NPS to their departments - 
+20) Payment of Salary - Normal Payment voucher (Ctrl+F) -> Process for Salary payment -> payroll ledger (salary payable).
+21) PF payment to PF department - Normal Payment voucher (Ctrl+F) -> Process for PF challan -> payroll ledger (PF payable). Provide Details if required. Can also Take print of Challan.
+    PF will be paid on this single entry.
                                                                                        
                   
                                                                                          
