@@ -1,37 +1,87 @@
 TDS - Tax Deducted at Source - Any company and person making payment is required to deduct TDS at the source at the time if the payment amount exeeds certain
            threshold limits (notified by government). TDS has to be duducted at rates (payment nature with section codes) prescribed by tax department. The deductor also
            needed to file TDS return in quaterly statement given to the IT department.
-           Create Nature of Payment - Create -> TDS nature of payment -> name (payment to contractor) -> section (194c) -> payment code (94c) -> set rates (2% - rate for 
-           deductee with a pan, 20% - rate without pan) -> threshold limit (75000 - if expenses crosses total amount of 75000 in a year then TDS will be applied).
-           Create Ledgers
-                   1) Advertisement expenses -> indirect expenses -> TDS applicable (yes) -> nature of payment (payment to contractor) -> save and exit.
-                   2) TDS a/c -> duties and taxes -> type of duty -> TDS -> nature of payment (any - if you select a specific nature of payment then TDS will applied to only that one. 
-                   3) Graphic Advertisers -> sudry creditor -> TDS deductable (yes) -> deductee type (company-resident) -> deduct in same voucher (yes) -> ***Enter pan (rate-2%).
-           The Entry
-                   1) Purchase entry - Make a simple entry of purchase of advertisement expenses of amount 100000 from Graphic advertisers.
-                   2) Deduct TDS in Journal voucher - Open journal voucher -> Autofill (Ctrl+F) -> TDS deduction -> select date/party/nature of payment -> duty ledger (TDS a/c)
-                        This will fill the entry automatically where total TDS amount will be 2%(2000 - if pan is available) of total purchase amount(100000).
-                   ***TDS deduction without autofill - Open journal voucher -> debit Advertisement expenses with total expense amount (100000) -> credit Graphic advertisers 
-                        with 98000 (Autofilled) -> credit TDS a/c with 2000 (TDS amount).
-***Look for reports -> D -> O -> TDS reports -> form 26Q -> you will find your deducted tds amount under deducted current period. 
-TDS with advance payment - 
-           Question -> 1) We paid Graphic designer advance of 40000 towards advertisement. 
-                                  2) After few days we recieved invoice of total amount 100000 (advance+60000) towards advertisement expenses. now deduct TDS on this purchase and
-                                       adjust it with the TDS already deducted on advance payment of 40000. 
-            The Entry - 
-                    1) Make payment entry -> Open payment voucher (***Use single entry mode) -> bank/cash -> Graphic advertisers (40000)-> TDS a/c (-800 -- minus signifies 
-                         successfull duduction on TDS) -> Note the total voucher value which decreases by TDS amount (39200).
-                    2) Journal Adjustment entry - Open journal voucher -> debit advertisement expenses (100000) -> credit Graphic advertisement -> adjust against advance TDS 
-                         payment (yes) -> against ref (bill-40000) -> new ref -> nature of payment (payment to contractor) -> tall will automatically deduct the TDS and credited value
-                         (98800) will be reduced by TDS amount (1200) -> credit TDS a/c (1200).
-                         
-Evaluation - TDS on advance 40000 => 40000*2% = 800
-                       TDS on full payment 100000 => 100000*2% = 2000
-                       Total deducted TDS value = 2000 + 800 = 2800
-                       Adjusted TDS value = 2800 - 800 = 2000 ( TDS payable)
+***Types of TDS -> There are two types of TDS.        A) TDS payable                   B) TDS receivable.
 
-Payment of TDS - 
-                   Look for you total TDS payable amoun in TDS outstandings in TDS reports.
+A) TDS payable - TDS that we deduct before paying to the creditor.
+   Create Nature of Payment - Create -> TDS nature of payment -> name (payment to contractor) -> section (194c) -> payment code (94c) -> set rates (2% - rate for
+                    deductee with a pan, 20% - rate without pan) -> threshold limit (75000 - if expenses crosses total amount of 75000 in a year then TDS will be applied).
+   Create Ledgers
+           1) Advertisement expenses -> indirect expenses -> TDS applicable (yes) -> nature of payment (payment to contractor) -> save and exit.
+           2) TDS a/c -> duties and taxes -> type of duty -> TDS -> nature of payment (any - if you select a specific nature of payment then TDS will applied to only that one.
+           3) Graphic Advertisers -> sudry creditor -> TDS deductable (yes) -> deductee type (company-resident) -> deduct in same voucher (yes) -> ***Enter pan (rate-2%).
+   The Entry : - There are two Three ways/methods of making TDS entry.
+           1) Using Two Entries - Make simple purchase first and then use Autofill in Journal voucher to Auto deduct TDS. In this method Make a simple entry of purchase of
+                                  advertisement expenses (in particular mode) of amount 100000 from Graphic advertisers. Now to Auto deduct TDS Open journal voucher
+                                  -> Autofill (Ctrl+F) -> TDS deduction -> select date/party/nature of payment -> duty ledger (TDS a/c). This will deduct TDS.
+           2) Using only One entry in journal voucher -  Make Purchase and TDS deduction both Manually (no autofill) in only one Journal entry. In this method Open journal
+                                  voucher -> debit Advertisement expenses with total expense amount (100000) -> credit Graphic advertisers with 98000 (Autofilled) -> credit
+                                  TDS a/c with 2000 (TDS amount).
+           3) Using only one entry in Purchase voucher - In this method we will deduct the TDS in the purchase invoice. This is also one entry method hence we don't need Any
+                                   other entry after this one. To do this Make purchase entry as usual but apply TDS ledger after applying the sold Service ledger. This will
+                                   deduct the TDS and TDS balance will be shown in negative. pass the entry and we're done. check reports for confirmation.
+     	***Look for reports -> D -> O -> TDS reports -> form 26Q -> you will find your deducted TDS amount under deducted current period.
+	***TDS amount will be 2%(2000 - if pan is available) of total purchase amount(100000).
+TDS with advance payment -
+           Question -> 1) We paid Graphic designer advance of 40000 towards advertisement.
+                                   2) After few days we received invoice of total amount 100000 (advance+60000) towards advertisement expenses. now deduct TDS on this purchase and
+                                        adjust it with the TDS already deducted on advance payment of 40000.
+            The Entry Using second method -
+                    2) Journal Adjustment entry - Open journal voucher -> debit advertisement expenses (100000) -> credit Graphic advertisement -> adjust against advance TDS
+                         payment (yes) -> against ref (bill-40000) -> new ref -> nature of payment (payment to contractor) -> tally will automatically deduct the TDS and credited value
+                         (98800) will be reduced by TDS amount (1200) -> credit TDS a/c (1200).
+
+Evaluation - TDS on advance 40000 => 40000*2% = 800
+                        TDS on full payment 100000 => 100000*2% = 2000
+                        Total deducted TDS value = 2000 + 800 = 2800
+                        Adjusted TDS value = 2800 - 800 = 2000 ( TDS payable)
+
+Payment of TDS -
+                   Look for your total TDS payable amount in TDS outstanding in TDS reports.
                    Open Payment voucher -> (Ctrl+F) -> select all fields -> all details will be filled automatically -> save and exit.
-                   Reports - If successfully posted then our entry will vanish from TDS outstanding and and our entry will be listed in TDS challan reconcillation for reconcillation 
-                                     with bank. 
+                   Reports - If posted successfully then our entry will vanish from TDS outstanding and it will be listed in TDS challan reconciliation for to be reconciled
+                             with the bank.
+
+B) TDS Receivable - TDS deducted by our debtor before he pays to us.
+***Since in case of TDS receivable, we don't need to deduct any TDS and file any type of returns to the tax department. It is our debtor who will deduct the TDS, we don't need
+         to Turn on the TDS and do any of configuration in the TDS menu. GSTs can be used as usual if the Transaction is charged under GST.
+
+Question - XYZ Co. Ltd. pays us rs. 	after deducting the TDS.
+
+Create ledgers - 1) Create ledger of XYZ Co. Ltd as usual way with GST details if GST is applied on it.
+	                    2) Service Ledger - Ledger of the service (ex - rent, transportation etc.) that we sold to the debtor. Create it as usual way under indirect income with GST
+                                          details if GST is applicable.
+                          3) TDS Receivable -> current asset or Loans & Advances (assets) -> save.
+***In case of TDS payable, we create TDS payable ledger under 'Duties & Taxes' but in case of TDS receivable, The TDS receivable ledger is created under current assets or
+                          Loan & Advance (asset) Group because debtor deducts this TDS from my sales income and deposits it to the government. Since There is a annual minimum limit
+                          for being eligible to pay TDS and this is calculated at the end of year hence in current situation TDS deposited by our debtor is like Advance Tax that is deposited
+		                      in the name of our company that is why it is taken as current asset. Keep in mind that TDS payable is not adjustable with TDS receivable but other taxes like Income
+                          tax can be Adjusted with TDS payable amount otherwise we'll get TDS receivable amount Refunded from government.
+The Entries - 1) Make Sales entry - Make a simple sale (500000) entry to the debtor. Apply GSTs (45000 of SGST/CGST) if applicable.
+		  ***TDS is calculated only on the sale amount that is 500000, not on the GST amount (45000 of SGST/CGST).
+                           2) Receipt Entry - Debtor makes payment of 585000 (590000-5000=585000) to us after deducting 1% TDS which is equal to 5000. There is no automatic
+                                              to handle this hence we will manually pass the receipt entry. Open receipt voucher -> Credit debtor with full payment (590000) making it's balance
+                                              zero -> Debit TDS receivable with TDS amount (5000) -> Debit bank/cash with rest amount (585000). Check balance Sheet where TDS receivable is shown
+                                              under assets column.
+Entry at End of Year - At the end of the year we need to clear our TDS payable amount. Since TDS is not adjustable with TDS payables (see below) like GSTs hence we cannot adjust TDS payable
+      			 with TDS receivables. We'll simply pay our TDS payable amount to Govt.  If we have TDS receivable higher than TDS payable then excess amount will be
+			       refunded to us by the Tax Department.
+
+***Unlike GSTs, TDS receivable is not Adjustable with TDS payable. Adjusting will not decrease TDS liability shown in form 26Q on TDS reports but Other Taxes such as Income tax
+           can be adjusted with the TDS receivable. Tax department will compare TDS and other Tax liabilities against TDS receivable and then refunds the excess amount after adjusting.
+Hence here we May have Two Scenarios -
+           1) We don't have Other Tax liability - In this case We will simply pay our TDS payable and tax department will Refund excess amount after adjusting it with our TDS receivable amount.
+                                                  Upon receiving the refund we'll need to reset our TDS receivable ledger's balance to zero. To do this.
+           2) We have Other Tax liability - Suppose we have rs. 6000 income tax liability and also have TDS Receivable of rs. 5000. In this case To adjust Income Tax value with TDS receivable
+                                            follow the steps.
+                                            1) Create income Tax Provision ledger under current liabilities. Don't need this if Income tax liability is less than TDS receivable.
+                                            2) Create Income Tax ledger under indirect expenses (cur balance - zero).
+                                            2) Open journal voucher -> Dr. Income Tax (indirect exp.) with 6000 -> Cr. TDS receivable with 5000 to make it's balance zero -> cr. Income tax
+                                               Provision with 1000 (don't use this step if Income tax liability is less than TDS receivable). This way we adjusted our TDS receivable with income
+                                               tax and our current payable Income tax liability is shown in income tax Provision ledger's balance.
+                                               Now if TDS receivable is more than income tax liability then we'll still have amount in TDS receivable ledger on which we can perform the point-1
+                                               for further settlement of TDS receivable.
+
+
+           Upon receiving that from Tax Department we will simply transfer our TDS receivable ledger's amount to our Drawing/capital account (decreases Capital adds profit/asset to business)
+	     to make TDS receivable's balance zero.
