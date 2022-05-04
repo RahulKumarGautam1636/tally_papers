@@ -61,7 +61,8 @@ Create Liabilty for Salary, PF, ESI and NPS -
 Payment of Salary, PF, ESI and NPS to their departments - 
 20) Payment of Salary - Normal Payment voucher (Ctrl+F) -> Process for Salary payment -> payroll ledger (salary payable).
 21) PF payment to PF department - Normal Payment voucher (Ctrl+F) -> Process for PF challan -> payroll ledger (PF payable). Provide Details if required. Can also Take print of Challan.
-    PF will be paid on this single entry.
+22) Similary pay the NPS, ESI, Professional Tax to their respective departments.
+
                                                                                        
                   
                                                                                          
