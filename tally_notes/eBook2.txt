@@ -1,0 +1,168 @@
+1) Map UQC, to do this goto GOT > Display > Statutory Reports > GST > Map UoM - UQC > press Alt+S, to map UQC. Without mapping related Entries are taken as mismatch info in GST reports.
+2) Purchase from URD - These type of purchases is charged under RCM method hence don't apply GST ledgers during entry, check tax analysis for RCM tax value.
+				1) Make purchase on Reverse charge - When value exeeds 5000 per day then tax is liable to pay under RCM.     
+				2) Increase Tax liability - Use alt+j in journal voucher .
+				3) Make payment of Tax - Use alt+j in payment voucher select recepient liability.
+				4) Clain input tax credit - Use alt+j in journal voucher.
+3) Imports - Do same as point-2 just use IGST instead of CGST/SGST. while creating Imports ledger under purchase set nature of transaction as "Import Taxable" and set IGST 18%. 
+   NOTE - Imports entries can be done by applying IGST but it's not legal to do so. Don't IGST on it and Use RCM method same as Point-2. 
+
+****For ponints 4 to 6 watch this - https://youtu.be/xR3SHmxjXxc
+4) Advance receipt and payments with GST - For any advance received for goods or services, if the corresponding sales invoice is not raised in the same month, the dealer
+								  who has received the advance has to pay the GST.
+			1) The advance is assumed to be inclusive of tax if not paid separately by the customer.
+			2) Record Advance receipt entry by Pressing (Alt+N or alt+J in prime) select advance receipt, otherwise this will not be shown in GSTR-1 report under Advance Receipts.
+			3) Make partial sale entry if Partial amount of goods are sent to the buyer. While making sale entry must take Against Ref (select ref of Advance receipt).
+			   This will decrease our tax liability and If not all goods are delivered then we need to Pay the Tax on remaining advance amount. Goto GSTR-1 under unadjusted 
+			   advance receipt field to see details. Now for remaining tax liability payment.
+										     1) increase Tax liabilty - Use Alt+J and take on account of advance receipts -> make ledger of "Tax on advance" under
+															  curr. assets and use it to increase tax liability with remaining tax liability.
+										     2) pay the tax - using alt+J in payment.	
+ 										     3) claim Input Tax credit - Journal Entry of INCREASE OF INPUT TAX CREDIT.
+     NOTE - While performing INCREASE OF TAX LIABILITY step must Provide GST Details and take the related Party ledger otherwise this entry will have no effect the GST report and Booking
+		of charges will be failed. The entry will be listed in Mismatch entries in GSTR reports.           
+
+
+5) Imports with Advance Payments - almost same as point-4.
+					     1) Make Advance payment in Payment voucher by pressing Alt+J and select "Advance payment under reverse charge".
+					     2) from here steps will be similar to. use "Tax on advance" while increasing Tax Liabilty. Also use IGST output to increase tax liability. 
+
+6) Cancellation of Advance receipts/payments - Also called reversal of GST is a process done when a an Advance receipt or payment entry is cancelled fully or partially. 
+		       1) Advance Payments - Suppose we paid 
+						     advance for buying goods then we make the payment entry and then also increased the Tax liability as the process metioned in point-5.
+						     Now if the order is cancelled for any reason them we need to cancel/reverse the payment entry and also reverse the Increased tax libility.
+						     1) To reverse payment entry pass a receipt with Alt+J selecting "Refund of advance payments". 
+						     2) To reverse Tax liability - goto journal voucher Alt+J select "Decrease of Tax liability" and Select "Cancellation of Advance payment under
+											     reverse charge. Dr. IGST and Cr. Tax on Advance a/c.  
+				
+			 2) Avance Receipts - Similarly this can be done by taking relevant fields into account.
+7) Mixed Sales/Purchase - When two or more stock items are sold togather as a bundle in one invoice then it is called mixed sale/purchase. The item with maximum GST rate will be considered
+				  as the selling GST rate. Bundle is just a Stock unit, create it in units under Bundle QOM and add into it a description on items that are bundled in it. see F12
+				  for enabling Description. Ex - Super Pack (item 1, item 2, item 3...). here super pack is bundle in which item 1, 2, 3 are bundled. 
+8) Composite Sales/Purchase - When two or more items are sold togather in which one item is considered as Principal product or Main product and other dependend item are called secondary
+				      items then this is called composite sale/purchase. Rate of principal item is taken as Rate of sale/purchase. If the rate of Principal item is lower than the
+				      rate of other additional charges/expenses incurred with it then still the Rate of principal item is takes as Rate for Compsite supply. 
+9) MRP sales - Each stock item can be assigned an MRP tag on it. To do this from item creation screen -> F12 -> turn on MRP details. while setting MRP "set MRP for GST calculation - No".
+		   Also can set MRP as State wise just press F12 again from here.
+10) Diff GST rate according to selling price - We can also set GST rates according to selling value. for exmple selling footwear below 500 will charge 5% GST where selling above 500 will 
+                                               attract 18% GST. To set it on stock item Goto item create/alter screen -> set/alter GST details -> calculation type set (On item rate) -> 
+		   					     set No in first option -> set amount upto and Rate to be applied.
+11) Branch Transfer - https://youtu.be/P1Y_lU3tGLU (2.5min) > Process of transferring Stock items from one company branch to another branch (both branch has same registration/GSTIN number
+			    and are situated in same state). Since this Process involves the sale transaction but still no tax will be applied to this and it will be not charged under GST even
+			    if the stock has GST rates applied on it.
+			    1) Create branch ledger under "branch/division" group and put same GSTIN number that you've entered on the company that you're working on.
+			    2) Create the Stock item/goods and must take "Branch transfer outward" under GST classification while defining GST rates.
+			    3) Optionally can create Branch Transfer ledger under sales group for a clear view in balance sheet.
+			    4) Pass normal sale entry of stock in sales voucher taking branch ledgers as party and sales ledger.
+			    5) If everything is correct then goto GSTR-1 -> change view -> nature-wise. where can see that no tax is calculated on it and it is taken as exempt.
+12) TDS Deduction - 1) Deduction of TDS in Purchase voucher on purchase of service.
+			  2) TDS deduction on Zero rated service. while defining "Nature of payment" set rate as 0 and then set Yes on Exempt field.
+			  3) After payment of TDS goto Report 26Q -> under uncertain transaction field -> select the payment entry, fill the details to see it's effect in balance payable amount.
+			  4) TDS PAID ON INTEREST - When any interest is generated then we need to deduct TDS under sec 194A on that interest before paying it. Pg - 83. follow steps.
+						          1) Create new nature of Payment -> Interest other than interest on security -> section (194A) -> pay code (94A) -> rate (10%) -> limit (5000).
+							    2) Create Interest payable ledger, activate TDS on it and take above created Nature of Payment in it.
+							    3) Activate interest calc. in Party ledger. Pass a normal TDS entry in journal voucher.
+							    4) Pass normal credit note entry (Take new Reference) to credit the Interest.
+							    5) Goto TDS reports 26Q -> look under field named "Uncertain transactions (correction needed)" -> Booking & Booking with Deduction entrie ->
+							       			       Press Alt+L to Link all Entries. Now come back to 26Q.
+							    6) In Report 26Q press Alt+J -> select related items -> will deduct the TDS on INTEREST AMOUNT generate in credit note.
+							    5) Now we can pay it normally from payment voucher Or from 26Q press Alt+S for payment. Follow point-3 to see the effect of payment.
+			  5) ITNS 281 challan - Now make payment of TDS to goverment. Take the print of Payment entry, it is said as ITNS 281 challan.
+13) TCS Deduction - 1) TCS is collected by the seller under sec 206C on speciefic items on speciefic rates when transaction exeedes a threshold limit. see list.
+			  2) If the buyer is a Government organisation or a public sector company then TCS is not applicable. Report 27EQ is quarterly filing used to file TCS.
+			  3) If the buyer uses the purchased goods for manufacturing process & producing things, then by the TCS applicability rules, TCS tax is not liable.
+			  4) Recording Normal TCS sale in Tally - Ex - sale of Timber wood -
+						   i) Most of steps are same as TDS entry. The only defference is that it is a sale entry hence we need to alter sale ledger or create new sale ledger
+						      named "Sales under TCS" under sale group and activate TCS on it and Take Nature of Goods created in next step.
+						  ii) Search and Create "Nature of Goods" with name "TCS on timber wood" -> section (206C) -> pay code (6CB) -> with pan (2.5%) and without pan (5%) ->
+						      threshold limit (1000000).
+						 iii) Create Timber wood stock item and take above created Nature of goods in TCS section. Create Party ledger with TCS active on it and we're all set
+						      to pass TCS entry in sale voucher as we do with TDS entry in purchase voucher. Rest of Process is exactly same as TDS entry. See report 27EQ.
+			  5) TCS sale at Lower Rate - When the Assessing Oﬃcer is satisﬁed, the deduction of TCS at lower rate can be allowed under section 206(1). We need an just one extra step
+								to achieve this. While creating the party ledger set Yes in "Use advance Confg. for TCS" -> Ignore Income Tax exmp. limit (Yes) -> Select 
+								related Nature of goods -> set/alter zero/lower rate for collection (Yes) -> Take related Nature of goods -> must enter random Certificate
+								number -> Take current Period -> Enter The Lower rate that is to be charged -> save.
+								Now if we pass normal TCS entry then lower rate (1.5%) will be applied on that party ledger instead of normal rate (5% - timber).
+								This entry can be found in 27EQ under Deducted at lower rate field.
+			  6) TCS sale at NIL Rate - Follow point-5 and just put lower Rate 0%.
+			  7) ITNS 281 challan - Now make payment of TCS to goverment. Take the print of Payment entry, it is said as ITNS 281 challan.					
+14) Job Costing - Book uses stock item with cost center to process job work. Hence uses Manufacturing process to consume the raw materials (don't apply labour and transportation charges in 
+		      manufacturing journal entry). While selling the Project select the finished item and also select project cost center to sell the Project to buyer.
+    ***NOTE - Sell the projects in Voucher mode otherwise it won't effect the job work analysis reports.
+15) Job work - 
+		   1) Job work out - Uses Raw material godown, finished goods godown and Job Worker Godown in this process. Take Finished goods Godown for main item in Job work out entry.
+		   2) Jon work in - Uses only 1 Godown that is named with Principal company. Take that godown in Job work in entry and use Not applicable in Material in/out vouchers.
+16) Tally Audit - https://www.youtube.com/watch?v=Bxvf8M0sj2o
+			1) In ERP 9 this feature can only be accessed from company alateration ascreen (Alt+F3 -> Alter).
+			1) Create Admin user password. Create user new User roles and define limited fucntion to them. See Audit reports for User wise entry details.
+17) Interest Calculation - in rate setting screen Past due date lets us set the number of days after due date, Interest calculation will be applied (similar to credit period but covers the
+				   the due date if been set with "due date of invoice/ref).
+18) Syncronisation - 1) There are two types of sync is available. 
+				i) On demand sync - No need for companies to be connected in real time for sync. Tally.Net server recieves and stores the sync rule and data until it is received by
+				     			  the server comopany. Sync rule is type of Operation that is done by the client company.
+			     ii) Online sync - Companies needs to be connected in real time for sync. Syncronisation takes place immedeately in this case.
+			   4) It is mandatory to Activate security to use the syncronisation/TSS feature in tally.
+			   3) On demand sync - Follwing steps are required to start on demand sync -
+						     i) Configure sync on Server Tally - set "Acting as SERVER" and Port no. 9000 (in this case). Rest are Optional, set most of them to yes.
+						    ii) Configure TSS on Server - Enter a connect name (Client will use it to connect with us) -> Allow to connect -> Yes.
+						   iii) Configure Client Tally - Set "Acting as CLIENT" and Port Same as set on Server Tally that is 9000. Leave the rest.
+						    iv) Configure TSS on client - Set same as Point-ii, just enter connect name followed by "Branch" to indicate that it is a branch of Main company.
+						     v) Create Sync rule on Client - select rule name and server a/c id and name of Main company that is to be connected. Also set Direction of sync.
+						    vi) Sending sync request - Now post entries in client and goto GOT -> import of data -> sync -> select sync all/selected to send sync request.
+						   vii) Activate sync rule in Server tally - GOT -> import of data -> sync -> server rules -> select sync rule/req came from client and set activate it.
+						    ix) Sync the Server Tally - GOT -> import of data -> sync -> sync all/selected to start sync and bring the sync data on server tally. Now the
+											  Entrie posted in client tally will can be seen here. 
+			   4) Online sync - Follwing steps are required.
+						  i) Configure sync on Server Tally - Use point 3(i) but set Yes to rest of the fields. Saving prompts for a Restart.
+						 ii) Configure TSS on Server - Use point 3(ii). 
+						iii) Connect company to Tally.NET - GOT -> F4 -> Select company (doesn't appears if single company is loaded) -> Shows success message in calc panel.
+						 iv) Configure Client for sync - Use point 3(iii) and rest can be set to yes. Takes a Restart.
+						  v) Create sync rule on Client - Use point 3(v).
+						 vi) Sending sync request - Use point 3(vi).
+						vii) Now perform point - 3(vii) and 3(ix) to activate sync rule and Sync server tally to complete the process.
+			   5) Snapshot - This capability allows us to manually export the data into an XML format ﬁle which is stored in C:\Tally.ERP9 folder. 
+					     i) Export Snapshot - Gateway of Tally > Import Data > Synchronisation > Export Snapshot.
+					    ii) Import Snapshot - Gateway of Tally > Import Data > Synchronisation > Import Snapshot.
+			   6) Sync Reports - 1) Sync Summary report - Get the sync details according to sync status. F1 for Pending, F2 for Sent req/data, F3 for Received.
+			   			   2) Status Report - provides details of the sync such as name of the rule, data type, last synced date, status of synchronisation and mode of sync.
+						   3) The Exceptions report displays details of the errors while synchronising vouchers. You can correct them directly from this report.
+
+19) Multilingual - Let's us use the Tally in multiple languages. Download languages file (.dtc) and paste it in "lang" folder present in "C:\Program Files\TallyPrime". And also write the 
+			 Tally.ini file present in this location. Restart Tally to see new languages (Press Ctrl+K). Windows 95, 98, ME doesn't supports Multilingual.
+20) Control & Support Center - 1) Control Center - The Control Centre works as an interface between the users and Tally.ERP 9 installed at diﬀerent sites. it has following sub-sections.
+								   i) Licensing & Conﬁguration: To Conﬁgure and Conﬁrm/Reject Site Activation. 
+								  ii) Jobs & Recruitment: To place your job requirement and select candidates for employment. 
+							       iii) Employee Assessment: Assess the knowledge level of your employees through test paper management. 
+								  vi) Proﬁle Management: Maintain/Change details of your/Administrator's account. 
+								   v) User Management: To create Remote Users and assign security controls.
+								  vi) Change Account Administrator: Allows the Account Administrator to change the Account Administrator’s User ID. 
+								 vii) Manage Data sessions: The Manage Data Sessions screen displays important information about remote login data sessions (login by
+												    various users into the administrator’s remote companies) of authorised users.
+					 2) Support Center - is used to post the queries on the functional and technical aspects of Tally.ERP 9.
+					 
+21) SMS Query - Allows us to access tally data through SMS service. Followig are steps to implement it on tally.
+		    1) Security control should be enabled to use SMS query.
+		    2) Register your mobile number - Open Conrol center, Login as remote Tally.NET user -> Goto My profile (Alt+W) -> enter your Mobile number.
+		    3) Enable SMS service in TSS features - GOT ->  F11 -> TSS features -> in SMS section Set yes an enter a company's short name (don't exceed 8 chars).
+		    4) Allow user to SMS - Goto security control -> users & passwords -> select user, enter Required e-mail and set yes on "Allow SMS access".
+		    5) Connect company to TSS - GOT -> F4 -> Shows success message if connected. Will also Receive an email conataining following things.
+							  i) SMS suffix - A unique number allotted to each company. It is added at the end of the service number while sending the SMS request.
+							 ii) Company Connect Name - The company’s name provided in the Connect Name ﬁeld under Connection Details in F11: TSS Features.
+		    6) Accessing data via SMS - Type reqeust in syntax - <Request> send it to 5667792 [Where Request may be name of ledger, 566779 is real service no. and 2 is SMS suffix. 
+							  Ex - 1) Cash Balance send it to 5667792     [will give balance of cash ledger]
+								 2) Cash Balance as on 31-4-2022 sent it to 5667792    [will give balance of cash ledger on 31-4-2022]   
+     
+22) Web Publishing - Used to Upload reports on the web servers/sites using Upload feature (Alt+O). Following steps are needed.
+			   1) Goto required report - Balance sheet (in our example) -> Alt+O -> The upload configuration screen has following optoins.
+							     1) Upload to - Type of website on which you're about to upload.
+							     2) URL - Enter the website address.
+							     3) Secure server - Set yes.
+							     4) Username and Password - both are optional (set if required).
+							     5) Output Format - Select format (HTML for Web publishing).
+							   	
+23) Gouping Companies - 1) Group companies is used to See consolidate/combine reports of multiple companies on a single screen. Great way to compare multiple conpanies. see point-5.
+				2) Create Group of Companies - Add/load Multiple (at least two) Companies then To GOT -> Alt+K -> Create -> Alt+R -> Enter details for Create Group company.
+				3) No Voucher can be entered in Group company. it can only be used to see consolidated report. Still Vouchers can be entered in member companies.
+				4) Companies with different base currencies can't be grouped togather.
+				5) Compare Reports of Group company and member companies - Goto any report such as Balance sheet or P/L account -> New Column (Alt+C) -> Take comparing company ->
+				   OK. Can take Multiple for companies for comparison by adding more columns. Press Alt+D to delete a column.

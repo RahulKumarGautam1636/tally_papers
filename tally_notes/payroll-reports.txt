@@ -1,0 +1,78 @@
+Payroll Reports - 
+1) Provident Funds Report - 
+	Gateway of Tally > Display > Payroll Reports > Statutory Reports > Provident Fund
+	It is sub-devided into Monthly and Annual based report.
+	Monthly - 
+		   1) Form 5 - Shows monthly report of newly joined employees for the current month.
+		   2) Form 10 - Shows monthly report of employees leaving PF scheme in current month.
+			Note - As Form 10 shows employees leaving PF hence must mention Date of Retirement on employee setup page to see that employee on that month in this report.
+		   3) Form 12A - Report provides details for PF payments made the respective PF accounts in current month.
+ 		   4) Monthly Statement - MIS report which provides the details of the amounts contributed by the employees and employer towards the PF accounts. 
+		   5) E-Challan Return (ECR) - Electronic Challan cum Return (ECR) is an electronic return in plain text format. All employers of covered 
+			establishments under EPF can now file Electronic Challan cum Return (ECR) from April 2012 and get rid of filing physical returns.
+
+	Annual - 
+		   1) Form 3A - An employee wise annual report which shows details of only one employee at a time. It shows the amounts deducted/contributed by the employee and the employer.
+		   2) Form 6A - Is Detailed Annual Statement/report of contribution towards different PF accounts for the given currency period (financial year).
+		   3) E-Return - There are four E-return namely. These are Digital versions on Returns:
+				     1) Form 5 (Monthly) - E-return for the Form 5 discussed above.
+				     2) Form 10 (Monthly) - E-return for the Form 10 discussed above.
+				     3) Form 12A (Monthly) - E-return for the Form 12A discussed above.
+				     4) Form 3A (Annual) - E-return for the Form 3A discussed above.
+
+2) ESI Report - 
+	Gateway of Tally > Display > Payroll Reports > Statutory Reports > Employee State Insurance.
+	It is also sub-devided into Monthly and Annual based report.
+	Monthly - 
+		    1) ESI Form 3 - is a Return of Declarationform to be submitted during each month with the details of the employees falling in the purview of ESI during the given month.
+		    2) Monthly Statement - is an MIS report which provides the details of the amounts contributed by employees’and employer towards the ESI account during the given month.
+		    3) E-Return - is a return of declaration form to be submitted during each month with the details of the employees falling in the purview of ESI during the given month.
+	Annual - 
+		    1) Form 5 - is a return of contribution form to be submitted half yearly with details of employee wise ESI contribution made on a monthly basis.
+		    2) Form 6 - is register of employees falling under the purview of ESI with detailed monthly information on the worked days, wages received and employees’ contribution
+				    towards the ESI.
+
+3) Professional Tax Reports - 
+	Gateway of Tally > Display > Payroll Reports > Statutory Reports > Professional Tax
+	It is sub divided into two types 
+	Monthly - 
+	  	   1) Computation Report - monthly report which provides the details of the PT amount that the employer is liable to pay to the professional tax department during the given
+						   month. 
+		   2) Statement - MIS report showing the professional tax of all employees and contribution details for the given month.
+
+4) NPS Report - 
+	Gateway of Tally > Display > Payroll Reports > Statutory Reports > National Pension Scheme
+	It is sub divided into three types
+	1) Subscriber Contribution Details - Shows both Employees and Employer's contribution in NPS uder Tier-I and Tier-II accounts.
+	   Note -> PRAN - Permanent Retirement Account Number (PRAN) is a unique 12 digit nember allotted to every subscriber contributing to the national pension scheme.
+	2) NPS Summary - This report provides a complete breakup of the total contribution made to Tier- I and Tier-II accounts along with the calculation percentage. 
+	3) PRAN not available - This report displays the list of employees for whom PRAN is not provided in the employee master.
+
+5) Income Tax Reports - Following Income Tax Reports are Provided in Tally Prime. GOT -> Payroll reports -> Statuory reports -> income tax -> 
+			      1) Computation Report - displays the employee-wise income tax computation details in the Form 16 format. Along with the total tax payable, it also displays
+								the balance tax payable, tax already paid and tax amount to be deducted in the subsequent month.
+				2) Salary Projection - provides the details of the Earnings and Deduction pay head values which are considered for income tax for selected employees. It
+							     provides the projection for twelve months and displays the actuals if payroll is already processed for any given month. 
+				3) Challan Reconciliation - This screen is used to reconcile the Income tax payment challan details with the bank. Press Alt+R to Start reconciliation.
+				4) Returns - This is used Generates following Income Tax Returns.
+						 i) Monthly - 
+								 1) Form 24Q - is a quarterly statement which contains the details of the salary paid and tax deducted from the employees that an
+										   employer needs to submit to the department in each quarter.
+							       2) Annexure I to 24Q - Along with the Form 24Q, Annexure I and Annexure II is also required to be submitted. Annexure I is required
+												to be ﬁled with Form 24Q in all four quarters while Annexure II has to be ﬁled only in the last Quarter.
+								 3) Annexure II to 24Q - As said above Annexure II has to be ﬁled only in the last Quarter with Form 24Q.
+						ii) Annual - 
+								 1) Form 16 - is the certiﬁcate issued for tax deducted at source from income chargeable under the head salaries.
+								 2) Form 12BA - Form 12BA is the statement displaying the particulars of perquisites, other beneﬁts or amenities and proﬁts in lieu of
+										    salary with value.
+								 3) ITR-1 - (Indian Income Tax Return) is used to file income tax return. Similar to Form 16, ITR-1 is can also be printed separately for
+										each employee. ITR-1 is used for individuals having income from salary.
+				5) E-Return - Following income tax E-returns are generated in tally prime - 
+						  i) E-24Q - E-24Q is a Quarterly e-return which contains the details of the salary paid and tax deducted from the employees that an employer needs to
+						             submit to the department in each quarter.
+						 ii) Form 27A -  is a summary of TDS return which contains control totals of amount paid and income tax deducted at source. Form 27A is to be ﬁled in
+								     physical form with each return i.e., Form 24Q.
+				6) Exception Reports - 
+ 
+
+	

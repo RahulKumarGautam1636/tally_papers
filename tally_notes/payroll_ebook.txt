@@ -1,0 +1,150 @@
+DA = calculated on basic salary and added to employee salary to mitigate the impact of inflation on people. 
+HRA = 30% of (basic pay + DA).
+PF = if basic pay is less than 6500 then PF is 12% of earned basic pay else it will be rs.780.             [earned basic = current month's earning after eliminating leaves/absent]
+EPS = 8.33% of basic pay if basic pay is less than 6500 else rs.541.
+EPF(3.67% of basic pay) = PF(12%) - EPS(8.33%)
+Professional tax = Tax amount is Zero if current months total earning is less than 5000, rs.175 if it's between 5001-10000 and 200
+                                 or 300 if greater than 10000. Tax amount is deducted and deposited to the bank by the employer. 
+ 
+194A	 -   Interest other than interest on sercurities    -    10%    5000
+194C	 -   Payment to contractors 				    -    1-2%  100000
+194D   -   Insurence comission   				    -    5%    15000
+194H   -   Comission or Brokerage				    -    5%    15000
+194J   -   Professional and                               -    5%   30000
+	     Technical services                             -    2%    30000
+194I   -   Rent on Plant, machinery                       -    2%    240000
+	     Land or Building                               -    10%   240000
+
+Company code -     KN          BNG        7 NUMS         3 NUMS     =     Total 15 chars.
+		   RegionCode   officeCode 	ESTcode	ExtensionCode   
+
+
+Creating Masters - 
+1) Employee category - Ex. Head office and Regional offices. Set yes on Both Allocate Revenue/Non-revenue items. Otherwise category will not be shown in autofill menu in during payment.
+2) Employee group - Ex. Sales Department, Administration and Marketing Department.
+3) Create Employees under their respective groups.
+4) Create Time Units Hour and Minutes and Hour of 60 Minutes.
+5) Create Attendance/Production type - Present, Absent and Overtime. Can aslo Define Own Calendar type -> name (My Calendar) -> Under (User Defined Calendar type).
+6) Create Basic Pay Heads - Bsic Pay, DA, HRA, Conveyance, Overtime, Canteen Deductions. 
+   Also create Pay Head Salary payable under Current liability.
+
+Salary Processing Without Statuary Deductions - 
+7) Define Salary details on Employees, Employee groups or both (both in my case).
+8) Record Attendance voucher.
+9) Create Liabilty in Salary Payable Payhead. 
+	1) Pass Mannual entry for General allowance (ex-Canteen Deductions) in Payroll voucher (Ctrl+F) -> Process for (User Defined) -> Salary Payable -> Enter Amount manually in Entry.
+	2) Pass normal Salary Payable entry in Payroll voucher (Ctrl+F) -> Process for (Salary) -> Salary Payable. Amounts will be auto calculated.
+10) Payment of Salary from payment voucher (Ctrl+F) -> Salary payment.
+
+Salary Processing with Statuary Deductions -
+11) Statuary Deductions - 
+
+  i) PF Deductions - i) Employees PF deduction at 12% -> PF a/c no.1. 12% of Basic+DA.                          Note - DA is allowed only by government organisations.
+		        ii) Employer's contribution in PF at 12% that is divided into two sub pay heads.
+			      a) Employer's EPS contribution 8.33% -> EPS a/c no.10. Basic+DA -> 8.33% upto 15000 and rs.1250 on above 15000.
+			      b) Employer's EPF contribution 3.67% -> PF a/c no.1. Specified formula (Employees PF deduction at 12% - Employer's EPS contribution 8.33%) - percentage (100%).
+
+ ii) Employer's Other charges - i) EDLI contributions 0.5% -> A/c no.21 -> PF Gross -> 0.50%
+				       ii) EDLI admin charges 0.01% -> A/c no.22 -> PF Gross -> 0.01%
+				      iii) PF admin charges 0.85% -> A/c no.2 -> PF Gross -> 0.85%
+
+iii) ESI Deductions - i) Employees ESI Deduction 1.75% -> Employee Stat deduction -> emp state insurance -> Add all earning payheads(basic+DA+HRA+Conveyance+overtime) -> 1.75%.
+			   ii) Employer's ESI contribution 4.75% -> Employer's Stat contributions -> emp state insurance -> Add all earning payheads(basic+DA+HRA+Conveyance+overtime) -> 4.75%.
+
+ iv) Professional Tax - Employees stat deduction -> on current earnings total -> 0 upto 15000 and 200 for above 15000.
+
+  v) NPS (National Pension Scheme) - i) Employees NPS deduction 10% (Tier-I) ->	employees stat deduction -> National Pension Sheme Tier-I -> Basic pay -> 10%.
+					      ii) Employees NPS deduction 10% (Tier-II) -> employees stat deduction -> National Pension Sheme Tier-II -> Basic pay -> 10%.
+					     iii) Employer's NPS contribution 10% (Tier-I) -> employer's stat contribution -> National Pension Sheme Tier-I -> Basic pay -> 10%.
+
+12) Define Salary (Update) details - Add all Statuary pay heads except 3 Payheads under Employer's other Charges (EDLI) in Salary details.
+13) Create Pay heads PF Payable, ESI Payable and NPS Payable under current liabilities.
+14) Record Attandance in Attandance voucher.
+
+Create Liabilty for Salary, PF, ESI and NPS - 
+15) Process for Salary - Payroll voucher - (Ctrl+F) -> process for (Salary) -> Salary payable. 
+    Note - Only Pay heads that are related to employees will be shown in entry with deduction/addition amount. Pay heads contributing from Employers will be processed in next step.
+16) Process for Employer's contribution towards PF - Payroll Voucher (Ctrl+F) -> process for (PF contribution) -> PF Payable (created pay head).
+17) Process for Employer's contribution towards ESI - Payroll Voucher (Ctrl+F) -> process for (ESI contribution) -> ESI Payable (created pay head).    [Not calculated ??]
+18) Process for Employer's contribution towards NPS - Payroll Voucher (Ctrl+F) -> process for (NPS contribution) -> ESI Payable (created pay head).
+19) Process for Employer's other charges - i) Create a normal ledger under indirect expenses named "PF Admin charges".   (if shown - Use for payroll -> No).
+							ii) Now open journal voucher (Ctrl+F) -> PF other Charges -> Expense ledger (PF admin charges created above) -> Select all 3 EDLI pay heads.
+							    // We created Other charges liability here which we'll pay in point 21.
+Payment of Salary, PF, ESI and NPS to their departments - 
+20) Payment of Salary - Normal Payment voucher (Ctrl+F) -> Process for Salary payment -> payroll ledger (salary payable).
+21) PF payment to PF department - Normal Payment voucher (Ctrl+F) -> Process for PF challan -> payroll ledger (PF payable). Provide Details if required. Can also Take print of Challan.
+					    Following Pay heads are paid in this entry to make "PF payable" Ledger balance Zero.
+					    1) Employees PF deduction 12%.            // Makes it's balance Zero.
+					    2) EDLI Admin Charges 0.01%, EDLI contribution 0.5%, PF Admin charges 0.85%    // We had Created liability in Point-19 and paid it Here to PF department
+																			  making their balance Zero.
+						
+22) ESI payment - Follow point-21 and select ESI fields to Pay the ESI to ESI department.        // Not Deducted ??
+23) NPS payment - Follow point-21 and select NPS fields to Pay the NPS to NPS department. Makes NPS payable ledger balance Zero.   
+24) Professional Tax payment - Follow point-21 and select Professional Tax fields to Pay the Professional Tax to Professional Tax department. Makes Professional tax ledger balance Zero. 
+
+                                                                                       
+          
+23) Gratuity - Gratuity is a statutory beneﬁt provided by an employer on cessation of employee services. It is configured as per the following two methods.
+		  1) Payment of Gratuity Act, 1972– Where the minimum amount that you need to contribute towards gratuity is 15/26 percentage or 4.81 percentage of the monthly
+								basis salary of the employee.
+		  2) Company policy– When the company policy provides gratuity beneﬁts that are better than the beneﬁts provided as per the Gratuity Act.
+   Formula used for Calulation - Gratuity Calculation in India - 
+		  1) Upto Year Gratuity = [(Basic Pay + DA) x 15 days x No. of years of service] / 26
+						= (Basic Pay + DA) x Years of service x 15/26
+		  2) Monthly Gratuity - Monthly Salary x 4.81%
+   Pay Head Cretion - Name (Gratuity) -> Pay head type (Gratuity) -> Days (26) -> From 1 to 60 set 0, from 61 to 120 set 15, from 121 and above set 15. -> curr. liabilty.
+
+   Add Gratuity to Salary details of employees to calculate the Gratuity on them.
+   Note - No Tax is levied on Gratuity in case of Government employees.
+
+24) Income Tax - As per Income Tax Act of 1961,all persons who are considered as an assesse and when their income exceeds the maximum exemption in the prescribed limit and the income tax
+		    will be levied at the prescribed rates according to ﬁnance act.
+    Create Pay Head - Name (Income Tax) -> employee Stat deduction -> income tax -> save. Add this pay head to salaries of the employees.
+    For successful deduction of income tax we need to follow some configurational steps listed below.
+    1) Configure the Earning pay heads for income tax - Goto Alter mode -> search "Income Tax pay head details" and select and Set the "Income Tax Component" of Pay heads to their 
+									  respective Tax components. Take "On projected value" and Deduct TDS to "yes".   // ESI pay heads are not shown here.
+ 									  
+    2) Declarations - Certain declaration are made before calculating the final income tax. Goto Alter -> Search "Income Tax Declaration" and Select.
+			    i) Exemption under Section 10 - there are certain allowances which are exempted from income tax such as HRA, LTA, transport allowance, children education allowance
+									and children hostel expenditure allowance. We need to declare/set Pay heads with relavant info to get benefit of this exemption.
+									Under Exemption label we can see excemptions available to us we can configure/set it for Employee/Employee Group to get it's Benifit.
+			   ii) Income Declared by Employee - We also need to fill details of the income earned by the employee from other sources for Tax calculation. We can fill this info 
+									 in fileds under "Income Declared by Employee" label.
+			  iii) Deduction in Investments - Under Section 80C, 80CCF, 80CCG certain investments are allowed as deduction (based on a ceiling) for the computation of taxable income.
+    								    can fill details of those inventment in fields under "Deduction under Chpater VI-A" label.
+			   vi) Others - Under Section 80D, 80DD, 80E certain other expenses are also deducted before arriving taxable amount such as mediclaim, interest paid on higher education
+					    loan etc. can fill details of those expenses in fields under "Other(U/s 80D, 80DD, 80E, etc)" label.
+    3) Override Exeption Value (Optioinal) - Sometime for any reason we need to reset/override Exception value defined in Point-2(i). To do this goto alter Search "income Tax exempt" and 
+							   select. here we can Override the Exemption Amount of different pay heads. When income amount is overridden for any allowance, the voucher value
+							   will not be considered for income tax computation and the value speciﬁed in the override screen will be considered for the income tax. 
+    4) Override Tax Value (Optional) - Using this freature we can Reset/Override the whole income tax value for the employee. Goto alter search "Income tax amount". Keep in mind Point-3 
+						   only resets the exeption value of a certain pay head where This feature resets the whole income tax value for the employee.
+					
+24) Tax Configuration Screen - Tax conﬁguration screen allows the user to make all the necessary income tax related conﬁguration changes from one single screen. All the Operations done
+					 in Point-1 to 4 can be done directly from this Screen Goto Alter and Search "Payroll income tax configuration" and select it. Here all the Operational
+					 process is listed by their Sections under the law.
+					 
+				       1) Gross Salary - Shows Operation related to Earning pay heads.
+					 			 1) Perquisites - Under sec 17(2) or Form 12BA, Perquisites are Non-monetary beneﬁts (ex- Free club, meals services etc.) given to employee,
+											if any recovered from employee which are taxable. Details of those benefits also need to be filled here. Goto "Value of 
+											Perquisites" and suitable mode to enter details of such expenses.
+								 2) Profits in Lieu - Includes any compensation paid to the employees in connection with termination, modiﬁcation of terms of employment, 
+											    amount paid prior to employment which is taxable.
+					 2) Allowance To exempted U/s 10 - Point 24(2)(i) can be done directly from here.
+					 3) Deduction U/s 16 - Entertainment allowance and Professional tax can be configured here.
+					 4) Other income by employee -  Point 24(2)(ii) can be done direclty from here.
+					 5) Deduction under VI-A - Point 24(2)(iii) can be done direclty from here.
+					 6) Relief - The special reliefs granted to some employees due to the dual taxation system are also allowed as Relief U/s 89, 90 and 91 and is reduced from
+							 the Taxable Income based on the type of agreement with the other country.
+					 7) Tax Deduction Details - We get four choices herer.
+					    i) Advance Tax declared by Employee - If employee has alread paid the Tax in advance then we can mention it's details here before calculating income tax.
+					   ii) Tax Deducted by Previous Employer - If Previous employer has already Deducted and paid the Tax then his details can be filled in this screen. It is not
+											       same as Point 25. This takes info of Previous employer where other one takes info about earnings only.
+												 
+25) Previous Employer's Details - For successful computation of income tax and Form16 generation, the previous employer income and tax payment details are necessary for the employees who
+					    joined the organization in the middle of the year. To fill those details Goto Alter Search "Previous Employer income/exeption details" and select it.
+					    Select employee and Fill with previous Job's Earning info in this screen. See also Point 24(7)(ii).
+
+26) Now Income Tax pay heads are set calculate the Income tax. It will be deducted through noramal process of Payroll entry and can be paid normally from Pyament voucher.
+
+
