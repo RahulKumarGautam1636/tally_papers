@@ -1,0 +1,7 @@
+Figma Mockup Plugins - use in figma to create mockups.
+
+    Artboard Studio Mockups: https://www.figma.com/community/plugin/750673765607708804/Artboard-Studio-Mockups
+    Clay Mockups 3D: https://www.figma.com/community/plugin/819335598581469537/Clay-Mockups-3D
+    Vectary 3D: https://www.figma.com/community/plugin/769588393361258724/Vectary-3D-Elements
+    Mockup: https://www.figma.com/community/plugin/817043359134136295/Mockup
+    Angle Mockup: https://www.figma.com/community/plugin/778645840235495725/Angle-Mockups

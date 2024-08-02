@@ -1,0 +1,459 @@
+1) Server vs Client components - By default all components are treated Server components which are rendered on server side and then sent to client side. where client components are also first 
+                                 rendered on server side and sent to client side. The code that client receives also includes the js react code that also produces the same content that was
+                                 rendered on server. The react code runs and replaces all the server generated content from the page, This is called page hydration. Since the server rendered
+                                 and react rendered content are exactly same hence user doesn't feel that the whole page is re-rendered during hydration. After hydration of the page client
+                                 side code takes the control and everything works like normal react components. We can nest client side component in server side component without loosing the 
+                                 server rendering capability of client side component. see point 3.
+
+2) When to use Server/Client components - React hooks can not be used in server side components because that are used to manipulate the components when user interacts with the components hence
+                                          they must be used in client side components.
+
+3) Where to use Server/Client components - It is better to use client side components as less as possible so that we don't loose the advantages of server side components. for example if a
+                                               small part of a big component need to use hooks then it is better to create that part as a new component then add it to the parent component 
+                                               (we can nest client side component in server side component). It prevent us from making whole big component as client side component.                                            
+
+4) <Image /> components - image components from nextjs forces to speceify the height and width of images but it can be prevented with attribute fill which will use parents height/width for image. 
+
+5) Server actions = Server actions are async functions that are used to run only on servers to perform confidential operations on the recieved data. These functions need 'use server' directives on 
+                    top of them to work but we can define then in seperate file and then import to the client side files to that would work fine.
+
+6) Intial Data Loading in server side component - We use useEffect to initially populate the component with data in normal react components but in nextjs we can make the whole component 'assync'
+                                                  and then make api request from the component to get the data. since we are not using any hooks hence our component still remains server side 
+                                                  component. It is a special freature of nextjs. ex - suppose our MealsPage component need meals to populate itself on page load.
+
+                                                  export default async function MealsPage() {
+                                                    const meals = await getMeals();                 // we can use data fetching function here like this and use meals in the component.
+                                                  }
+
+                                                  // File getMeals.js
+                                                  export async function getMeals() {                // it is a server side function hence reaching database from here is safe.
+                                                    await new Promise((resolve) => setTimeout(resolve, 2000));       // added to simulate a delay.
+                                                    return db.prepare('SELECT * FROM meals').all();                  // get data from database.
+                                                  }
+
+7) Adding loaders - There are two ways to most used ways to handle loading states in nextjs app. We cannot use react way of handling loading states using hooks in server components.
+
+                    1) Using loading.js - This method replaces whole page with the loading spinner hence not used so much. To implement it, Just add a file name loading.js in the directory where the
+                                          page.js (the datafetching component) is present. Next will automaically replace the data fetching component with the loader component present in loading.js 
+                                          when the data fetching component make call to fetch data. loading.js works as a fallback for the data fetching component. If we place only one loading.js 
+                                          where layout page is present then it will work for all the components present in the app but if we place seperate loading.js file in each components route
+                                          directory the they will be used instead of the one placed with layout file. This works only if fetching is done according to nextjs method (point 6).
+
+                    2) Use Suspense component - This method is suitable for applying only the the component or part of component that is fetching data hence this method is preferred. It is component 
+                                                provided by react to handle loading states. Just wrap the data fetching component in <Suspence /> component and pass fallback property with the loading
+                                                spinner that will be shown during data feching. Ex - 
+                                                
+                                                <Suspense fallback={<p>Loading...</p>}>                 // now loading... will replace the Posts component when it makes api call to fetch posts.
+                                                  <Posts />
+                                                </Suspence>
+
+8) Handling Errors - To implement error handling in nextjs, Just add error.js file same as we did with loading.js file in point 7.1. Add and Export a component called Error which must be a client 
+                     component ("use client"). this will receive a parameter with details of error happened in the component. Error file added in root will catch errors happened in whole app.
+
+                     const Error = ({ error }) => {
+                      return <h1>Error happened</h1>;
+                     }
+                     export default Error;   
+
+9) Handling Not Found - We can add whole page for not found errors. Just add not-found.js page same as we did with error.js and loading.js. Now when item is not found then we can call a special 
+                        given by nextjs called notFound() which will show the component exported from closest not-found.js. If not found not present then it will show the closest error.js page.         
+
+                        if (!meal) {
+                          notFound();                 // this will present the component exported from closest not-found.js or error.js page.
+                        }    
+
+10) Server Actions - They are function that are used to only run on servers. they are use to do specific tasks that are only done in the backend. we can't define them in client components. It better
+                     to define them in seperate files with "use server" directive on the top so that they don't become client side code accidentally.
+
+                     'use server';                            // must use this on top of the file.                         
+                     async function shareMeal(formData) {     // formData is recieved from the submitted form.
+                      const meal = {
+                        title: formData.get('name'),
+                        summary: formData.get('summary')
+                      }
+                      console.log(meal);
+                      await saveMeal(meal);       // process the form data.
+                      redirect('/meals');         // redirect the user.
+                     }
+
+11) Form Handling - To retain the server side form handling we can't use the hooks, hence nextjs gives different method to handle the form submittions. We now use action="" attribute on the form
+                    elements to call a server action which will receive the form data and then can process it on the server. ex- 
+
+                    <form action={shareMeal}>                     // pass server action in action property. this will call the shareMeal server action with all the form data.
+                      <input name='name' required />              // shareMeal is defined in point 10.
+                      <input name='summary' required />
+                      <button type='submit'>OK</button>
+                    </form>
+
+12) Handle Submitting Status - In Nextjs we can add some loaders to indicate that the form submittion is in progress. We can use useFormStatus given by react-dom to handle such situations.
+                               it is client side code hence must be defined, exported from clinet side component and then can be used in server side components.
+                               
+                               >> formComponent.js -----------------------------------------------------------
+                                  <form action={shareMeal}>                    
+                                    <input name='name' required />             
+                                    <input name='summary' required />
+                                    <MealsFormSubmit />                   // Works only if used inside a form.
+                                  </form>
+
+                               >> MealsFormSubmit.js ---------------------------------------------------------
+                               'use client';                                   
+                               import { useFormStatus } from 'react-dom';
+
+                               export default function MealsFormSubmit() {
+                                const { pending } = useFormStatus();           // pending property given by useFormStatus holds the submitting state of form.
+                                return (
+                                  <button disabled={pending}>                  // disable form button when pending is true.
+                                    {pending ? 'Submitting...' : 'Submit'}     // show Submitting only when submittion is in progress.
+                                  </button>
+                                )
+                               }
+
+13) Check valid input - We must check validity of received form data that is 'meal' in point 10. We can do so by following method.
+                        function isInvalid(text) {
+                          return !text || text.trim() === '';               return false only if text is false or is a empty string after trimming.
+                        }
+                        >> use like this.
+                        if (isInvalid(meal.title) || isInvalid(meal.summary) || !meal.userMail.includes('@')) {
+                          // do something
+                        }
+
+14) Handling Invalid input in server actions - We must check the received form data in server actions for it's validity before using it for further operations. Ex - Suppose we used isInvalid function
+    Vid - 125                                  in a server action and found a invalid input then we can send a response from the server action to the that form component and then we can show the user
+                                               a message about this error. We have to use useFormState given by react-dom to capture that response and show the error. Since useFormState is client side
+                                               code hence we have to convert the form into client side code.
+
+                                               >> serverAction.js -----------------------------------------------------------
+                                                async function shareMeal(prevState, formData) {     // Now when used with useFormState, shareMeal will receive an additional parameter prevState that
+                                                  const meal = {                                    // is previous data of form. formData now will be second parameter.
+                                                    title: formData.get('name'),
+                                                    summary: formData.get('summary')
+                                                  }
+                                                  
+                                                  if (isInvalid(meal.title) || isInvalid(meal.summary) || !meal.userMail.includes('@')) {
+                                                    return { message: 'Invalid input' };          // Return the response that will be captured by the
+                                                  }                                               // useFormState in formComponent to show the error message.
+                                                }
+
+                                               >> formComponent.js -----------------------------------------------------------
+                                               'use client';
+                                               import { useFormState } from 'react-dom';
+                                               function formComponent() {
+                                                const [state, formAction] = useFormState(shareMeal, { message: null });      // takes server action and initial message as parameters, returns message
+                                                                                                                             // and the given server action to use in the form. works like middle man.
+                                                return (
+                                                  <form action={formAction}>                            // now we use formAction instead of shareMeal.                   
+                                                    <input name='name' required />             
+                                                    <input name='summary' required />
+                                                    <button type='submit'>Submit</button>              
+                                                    {state.message && <p>{state.message}</p>}           // Show error only if message exist.
+                                                  </form>
+                                                )
+                                               }
+
+                                               ** Response received from server action will be received by useFormState and then message will be shown to user.
+
+15) Cache Revalidation - In production mode Nextjs uses some aggressive chaching which can cause to miss out the updated page and load the pages from cache. Ex - Suppose we added a new meal from the
+                         addMeals page and then redirected user to mealsList page where we can see that the added meal is missing and not listed there. this means that page is reloaded from cache.
+                         To solve this we can force clear the cache when submitting new meal in the server action.
+
+                         async function shareMeal(formData) {  
+                          await saveMeal(meal);       // process the form data.
+                          revalidatePath('/meals');   // just add revalidatePath('/pathname') before redirecting user to that page.
+                          redirect('/meals');         // redirect the user.
+                        }
+
+                        ***revalidatePath('/pathname', 'page');           // Default which will only work on 'pathname' page.
+                        ***revalidatePath('/pathname', 'layout');         // will work on 'pathname' page and all the nested pages inside this path.
+                        ***revalidatePath('/', 'layout');                 // will work whole application.
+
+16) Adding Metadata - Adding meta tags in head of the generated html page. In Nextjs, in every page.js file we can define and export metadata object for that page. It will be added to that html page 
+                      as meta tags. If we don't define metadata object for a page then the metadata that is defined in root layout file will be used.
+
+                      *** Adding metadata to dynamic page - In this case we'll need to dynamically generate the metadata according to the dynamic item. for this Nextjs gives us a function called 
+                                                            generateMetadata() to dynamically create the metadata. Just define generateMetadata function in dynamic page that will return an object.
+
+                                                            >> meal.js (dynamic page).
+                                                            export async function generateMetadata({ params }) {      // Define this function beside the actual page component (MealsDetailsPage).
+                                                              const meal = getMeal(params.mealSlug);
+                                                              if (!meal) return;                 
+                                                              const dynamic_meta_data = { name: meal.title, description: meal.summary }
+                                                              return dynamic_meta_data;            // This will be added to that html page as meta tags.
+                                                            }
+
+                                                            export default MealsDetailsPage() {
+                                                              // this is the actual dynamic page.
+                                                            }
+
+17) Programatic Navigation - We can use useRouter to make Programatic Navigation in nextjs.
+                             import { useRouter } from "next/navigation";
+
+                             const router = useRouter();
+                             router.back()                    // Go back.
+                             router.push('/pathname')         // got to '/pathname.' 
+                             router.replace('/pathname')      // got to '/pathname' and disable going back. 
+
+                             >> for pages router.
+                             router.push('/pathname/id')         // got to '/pathname/id', where id is dynamic value. 
+
+                             router.push({                    // different syntax to go to '/pathname/id', where id is dynamic value (max).
+                              pathname: '/pathname/[id]',
+                              query: { id: 'max' }
+                             })  
+
+                        ***Note - Accessing url parameter with useRouter. useRouter works such that it returns undefined when component renders first time. The second render gives the correct value
+                                  of url parameters. Must perform a check for url parameter before using it in the component.  
+                          const router = useRouter();
+                          const params = router.query.slug;            // first render gives undefined, only next render gives the real value.     
+vid - 172
+18) Hydration in nextjs - NextJS pages are rendered on server and then sent to the user. After recieving the prerendered page, the javascript code of the react takes control of the page content.
+                          Now the page starts working as normal react app and page becomes interactive. This process is known as Hydration of pages in nextjs.
+
+                          ***Note - In a standard Nextjs app, only initial page is loaded prerendered, then react code takes control and runs the app as normal single page react app.                                    
+vid - 173
+19) Prerendering in NextJS - Nextjs offers two type of Prerendering. 1) Static Generation. 2) Server Side Generation.
+                             1) Static Generation - Pre-generate page (with data prepared on the server-side) during build time.
+                             2) Server Side Generation - 
+
+20) Static Generation - As we know in this approach all the pages are prerendered during the build time. The pages with dynamic data are also populated with data during build time and then Static
+                        pages are served. To achieve this NextJS two special functions 1) getStaticPaths() (to generate all the possible paths of the page) and 2) getStaticProps() (To inject data 
+                        into the dynamic pages that are to be show in the paths that we generated with getStaticPaths(). This means getStaticPaths runs first to generate all the possible dynamic 
+                        paths for page and then runs getStaticProps to inject data into each page on the generated paths. Ex - Suppose we have 3 products in our database and we created a dynamic
+                        product page on route '/products/id' to show the products to our users. now getStaticPaths will generate paths shown below for each product and then getStaticProps will
+                        retrieve data for p1, p2, p3 and inject it to their pages to generate prerendered pages.
+
+                        /products/p1 
+                        /products/p2 
+                        /products/p3 
+
+21) getStaticProps() - This special async function is also defined in the component file. During build time or page generation getStaticProps() is first called that inside it we make api calls to
+                       get the data for the component and then component takes this data as props to render content on the page. It is a server side function hence code placed in it will never be
+                       sent to client side, we can safely use sensitive information or credentials here. Since it runs only on server we can also use node pakages that only works server side
+                       such as fs (file system) module that can work in browsers. 
+
+                       export async function getStaticProps(context) {
+                        const { params } = content;                                                   // This is how we catch url query parameters in getStaticProps in dynamic routes (vid - 181).
+                        const productId = params.id;                                                  // Extract required data from url like this.
+                        const product = fetch('....${productId}');                                    // call some api to get data for dynamic pages.
+                        
+                        if (!product) {                                                               // To redirect to /noData page.
+                          retun { redirect: { destination: '/noData' } }            
+                        }
+
+                        if (!product.length) {                                                        // This will trigger the not found page if product is not found. See point 23.
+                          retun { notFound: true }                                                    // This requires fallback true in getStaticPaths show below.
+                        }
+
+                        return {                                                                      // retuns object with key props that will have data for out component.
+                          props: {                                                                    // props key is madatory to use.
+                            products: [{ id: 1, title: 'product 1'}, { id: 2, title: 'product 2'}],   // list of data for the component.
+                            product: product                                                          // single data for dynamic page component.
+                          },
+                          revalidate: 10                                                              // ***Enables ISR. see point 22.
+                        }                                                                             // we don't need it in getServerSideProps(). because it needs to run every time user request.
+                       }
+vid - 179
+22) Revalidate - Putting revalidate to true in getStaticProps enables ISR (Inremental Static Regeneration). suppose a user visits a page that has revalidate: 10 then if the user reloads the page 
+                 within 10 seconds then the same page will be shown to user but if user reloads the page after 10 seconds then NextJS will regenerate this page that will include the latest data and
+                 then show it to users. this is called ISR (Inremental Static Regeneration). Effect of revalidate time delay is only seen in production mode, not in development mode.
+vid - 182 
+23) getStaticPaths - In dynamic routes we can prefetch data for the dynamic page using getStaticProps that is not enough in case of Static Site Generation (SSG) we also need to tell all the
+                     possible paths (routes that is being generated using the productId that we get from url) to the NextJS, so that it can generate static page for that product too. In simple
+                     words we need to tell NextJS about all of our productId during build time. For this reason NextJS provides us the async function getStaticPaths(), it's work is to get all
+                     the possible paths that our dynamic page can have. We can define it in the component file same as we did for getStaticProps. Ex.
+
+                     export async function getStaticPaths() {
+
+                      return {                                                                      
+                        paths: [                              // Static pages will be generated for these list of products during build time.
+                          { params: {pid: 'p1'} },              
+                          { params: {pid: 'p2'} },
+                          { params: {pid: 'p3'} },
+                        ],
+                        fallback: true                        // also see fallback: 'blocking' below in notes.
+                      }
+                     }
+
+                     fallback - Fallback is indicator for NextJS that is used to tell NextJS that weather allow it to generate pages with Server Side Generation (real-time generation of pages
+                                when user make call for it. for example - user tries to visit product 4 with productId p4). In this case we did not have pregenerated page for p4 hence if we
+                                put fallback to true, then next NextJS will generate page for it in real-time to show the user which is called Server Side Generation. Also see handling not found
+                                case in point 23.
+
+                                Note - When using fallback to true we must use a loading component to show the user because if we reload the dynamic page or directly visit it by typing url,
+                                       for example visiting product p4 will throw error. The reason is that p4 is not pregenerated hence it should be generated on server side. Server Side
+                                       Generation takes some time to populate the page with data and show it to user. during this state if we try to read properties of page data then it throws
+                                       error of 'can't read properties of undefined'. to solve this just use checking of page data before reading it's properties.
+
+                                       function ProductPage(props) {
+                                         const { product } = props;
+                                         if (!product) {                     // check if product exist before continueing further. 
+                                           return <p>Loading...</p>
+                                         }
+                                         return {                                                                      
+                                           <h1>{product.name}</h1>           // reading name without product gives error. we solve this by checking for product above.
+                                         }
+                                       } 
+                                
+                                *** If we you use fallback: 'blocking' then we don't need the data checking. NextJS will simply wait for the data like simple react app. this is same as loading
+                                    data without loader hence user will feel like screen froze for a moment.
+
+24) Handling not found - In example of point 22 we pregenerated page for products p1, p2, p3. Suppose user tries to visit product 4 (p4). See point 21 for the example to see how to trigger not
+vid - 187                found page in such cases.
+
+                         export async function getStaticProps(context) {
+                          const { params } = content;                                                   
+                          const productId = params.id;                                   // If use tries to visit product page for p4 then              
+                          const product = fetch('....${productId}');                     // fetching p4 will result no product because we don't have product p4 hence
+                            if (!product) {                                              // This will trigger the not found page if product is not found. 
+                              retun { notFound: true }                                   // This requires fallback true in getStaticPaths shown above.
+                            }
+                            return {
+                              props: {                                                                  
+                                product: product                                                        
+                              }
+                            }
+                         }
+
+25) SSR - Server Side Rendering (SSR), generating pages server side on each incoming request is called SSR. We catch the incoming request and extract the data to generate the 
+          required page and then send it to user. This is achieved with special NextJS function called getServerSideProps(). We cannot have getStaticProps and getServerSideProps in same page and We
+          also don't need getStaticPaths with getStaticProps because paths will also be generated in real time by reading the incoming request.
+
+          getServerSideProps() - This special function work exactly same as getStaticProps props but have two major differences. 1) getStaticProps run on the build time where getServerSideProps runs
+                                 on server in real time when user makes request for a page. hence it generates the page in realtime. 2) in getStaticProps props we only have access to url params 
+                                 object where in getServerSideProps we will have access to actual request and response object like we do have in expressjs based apis. we can then extract data from
+                                 the request object and then use that to generate a page then send it to users. Ex - 
+
+                                 export async function getServerSideProps(context) {
+                                   const { params, req, res } = content;     
+                                   console.log(req)                                                             // here we get access to request object.                                    
+                                   const productId = params.id;                                                  
+                                   const product = fetch('....${productId}');                                   // rest of the things work same as getStaticProps.   
+                                  
+                                   if (!product) {                                                               // To redirect to /noData page.
+                                     retun { redirect: { destination: '/noData' } }            
+                                   }
+ 
+                                   if (!product.length) {                                                        // This will trigger the not found page if product is not found. See point 23.
+                                     retun { notFound: true }                                                    // This requires fallback true in getStaticPaths show below.
+                                   }
+ 
+                                   return {                                                                      // retuns object with key props that will have data for out component.
+                                     props: {                                                                    // props key is madatory to use.
+                                       products: [{ id: 1, title: 'product 1'}, { id: 2, title: 'product 2'}],   // list of data for the component.
+                                       product: product                                                          // single data for dynamic page component.
+                                     },
+                                ❌❌revalidate: 10       // we don't need it in getServerSideProps(). because it needs to run every time user request hence we don't need to revalidate anything.
+                                   }                                                                             
+                                 }
+
+26) Client side data fetching - We can still use react methods to fetch intial data for our pages. The only downside is that the data will not be available for web crawlers resulting worse SEO 
+vid - 193                       results. Now to solve this we can blend prerendering of pages with client side page rendering (react methods of data fetching). For this we'll use useEffect and 
+                                getStaticProps on the same page. getStaticProps props will generate prerendered page and when it's loaded in browsers then react will take over and useEffect will
+                                make api call again to repopulate the page with latest fetched data.      
+
+                                import { useEffect, useState } from 'react';
+
+                                function LastSalesPage(props) {
+                                  const [sales, setSales] = useState(props.sales);              // set receive data from the getStaticProps as initial data.
+                                                                                                // this will initially populate the page with this data at build time.
+                                  useEffect(() => {
+                                    const data = fetch('https://nextjs-course-c81cc-default-rtdb.firebaseio.com/sales.json', (url) => fetch(url).then(res => res.json()));    
+                                    if (data) {                         // call the same api to get latest data.
+                                      setSales(data);                   // This useEffect will run only when page is loaded in browser (client side). hence useEffect will run at client side to
+                                      setIsLoading(false);              // repopulatethe already prerendered page with latest data. User will not feel any delay during this process.
+                                    }
+                                  }, [data]);
+
+                                  return <h1>{data.name}</h1>;
+                                }
+
+                                export async function getStaticProps() {
+                                  const data = fetch('https://nextjs-course-c81cc-default-rtdb.firebaseio.com/sales.json', (url) => fetch(url).then(res => res.json()));      
+
+                                  return { props: { sales: data } };            // call api to get page data for prerendering of pages.
+                                }
+
+                                export default LastSalesPage;     
+
+vid - 211
+27) Head tags - NextJS provides <Head></Head> component that returns <head></head> html tag that we can use to add any head related data such as meta and script tags to any of our components.
+
+28) Dynamic Head content - We can add head data dynamically to any of our components and nested components. If we add same type of head data to both higher and lower level component then only higher
+                           level component's head data is rendered. In case of different types of head data then all the head data is merged togather and then rendered on the page. Ex -
+
+                            <Layout>                                                                        // Layout page (Higher level component)
+                              <Head>
+                                <title>Next Events</title>                                                  // Title and description meta tags for whole website.
+                                <meta name='description' content='NextJS Events' />
+                                <meta name='viewport' content='initial-scale=1.0, width=device-width' />    // viewport type meta tag.
+                              </Head>
+                              <Component {...pageProps} />
+                            </Layout> 
+
+                            <SomeNestedComponent>                                                           // Some Nested Component (Lower level component)
+                              <Head>
+                                <title>{event.title}</title>                                                // Dynamic data in meta tags.                                          
+                                <meta name='description' content={event.description} />                     // Title and description meta tags for This component only.
+                              </Head>
+                            </SomeNestedComponent>
+
+                          Note - Now if we visit SomeNestedComponent page then all the tags between will be merged togather and the tag with lower level component will be rendered which means the
+                                 title and description of the SomeNestedComponent will be rendered as they are identical with the Layout component and only the viewport tag from Layout will be
+                                 rendered on the page.
+
+vid - 217
+29) _document.js (portals) - This gives us a way to add elements to outside of our application (layout component). Same as we used to add React Portals in react apps. create _document.js file in
+                             pages folder (not in any sub folders) and place given class component in it. class component is mandatory. The returned JSX structure represents our app. now we can add
+                             whatever and wherever we want to.
+
+                              import Document, { Html, Head, Main, NextScript } from 'next/document';
+
+                              class MyDocument extends Document {
+                                render() {
+                                  return (
+                                    <Html lang='en'>                                 // The structure should be same as this to work. 
+                                      <Head />
+                                      <body>
+                                        <div id='overlays' />                        // Best place to add global global loaders.
+                                        <Main />                                     // This is our whole app.
+                                        <NextScript />
+                                      </body>
+                                    </Html>
+                                  );
+                                }
+                              }
+
+                              export default MyDocument;    
+vid - 218
+30) Image Optimisation - The <Image /> component offered by NextJS gives some great features to optimise images for production mode. NextJS serves images according to the screen size of the device
+                         on which it is to be seen and also convert the images to webp type of images. This reduces image size to a great extent. NextJS also adds lazy loading to images by default.
+                         Images are loaded when appear on screen which makes the app fast and low data consuming.
+
+                         <Images src='image.png' height='400' width='300' />             // loaded images will have resolution of 400 * 300 px.
+                         <Images src='image.png' fill />                                 // use fill if height, width are not known. this will use height, width of parent element. 
+
+
+
+
+
+                                 
+
+
+
+
+
+
+ 
+
+ 
+ 
+
+
+
+
+                                                
+
+
+    
+                               
+
+

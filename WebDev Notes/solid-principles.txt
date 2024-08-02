@@ -1,0 +1,59 @@
+SOLID PRINCIPLES	- WEB DEV SIMPLIFIED
+
+S - Single responsibility : The functions and classes should have only one responsibility or work.
+O - Open closed : The name means our code must be open to extension but not to modification. The functions and classes are to me made in such way that we can add new features or extend
+  			it's functionality without modifying it. We just need to create new code on which this function will work to produce new feature. Ex - 
+
+			function myFunction(param) {			// suppose we have a function that works by taking a param as arugumnet. Now according to open / close principle, if we need
+				// something with param...		// to add new feature then we must create myFuction that we don't need to modify it we will just modify the param to produce 
+			}						      // new feature. Kyle suggests to not following this rule all the time.
+L - Liskov Substitution : if a class can work with a function then every subclass (classes that extend that class) of it will also work with that function. Ex - suppose we have a parent
+				  class Bird and two of it's subclass Owl and Duck. we also have a function that name makeBirdFly(). now we can see that Bird and it's subclass Owl can work with
+				  the makeBirdFly function but subclass Duck can not work because Ducks can't fly. Hence this is breaking the Liskov sub. rule. to solve we can make flyingBird
+				  and swimingBirdClass and extend subclasses according to that. we will also need makeBirdSwim() function. now all subclasses of flyingBird class will work with
+				  makeBirdFly() function and all subclasses of swimingBirdClass will work with makeBirdSwim() function.
+
+I - Interface segregation - Or interface (in typescript), parameter seperation. This rule says we should not pass any parameter to any classes that don't use this parameter. Avoid passing
+				    unneccesary parameters to class.
+
+				    Class Character {
+					
+						move() {
+							console.log('moving');
+						}
+
+						makeDamage(damagePoints) {
+							console.log(damagePoints);
+						}
+				    }
+
+					Class Person extends Character {				// Person is also Character of the game hence it's extending base class Character.
+						
+				    }
+
+					Class Turret extends Character {				// Turret is also Character of the game hence it's extending base class Character.
+						
+				    }
+
+				    const person = new Person();      // Since person can move also make damage hence this is fine to call move() and makeDamage() methods. 
+				    const turret = new Turret();      // Since turret can make damage but not move but we are letting turret access the makeDamage(). turret.move() is possible which we must prevent at any cost.
+				    
+				    // To solve this we break the Character class and it's methods to smaller class that will handle single responsibility and then assign them accordingly
+
+				    Class Character {
+					
+				    }
+
+					Class Mover {
+						console.log('moving');
+					}
+
+					Class Damager {
+						console.log(damagePoints);
+					}
+
+                    const person = new Person();      
+					Object.assign(Person.prototype, Mover, Damager);		// Assign person with Mover and Damager classes.
+				    const turret = new Turret();      
+					Object.assign(Turret.prototype, Damager);				// Assign turret with Damager class to prevent it's access to Mover and other classes.
+
